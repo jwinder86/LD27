@@ -21,7 +21,6 @@ public class BoredomClock : MonoBehaviour {
 		if(boredom > 0){
 			boredom = boredom - Time.smoothDeltaTime;
 		}
-		Debug.Log(boredom);
 		
 		// TODO: need to update this block to be a real trigger thing
 		//if(Input.GetButton("Jump")){
@@ -34,7 +33,7 @@ public class BoredomClock : MonoBehaviour {
 		}
 		
 		if (boredom <= 0.01f){
-			Debug.Log("DEAD");
+			//Debug.Log("DEAD");
 			boredomText.text = "DEAD";
 		}else{			
 			boredomText.text = ((int)boredom).ToString();

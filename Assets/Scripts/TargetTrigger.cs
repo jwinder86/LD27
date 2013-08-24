@@ -14,7 +14,7 @@ public class TargetTrigger : MonoBehaviour {
 	
 	}
 	
-	 void OnTriggerEnter(Collider other) {
+	 void OnCollisionEnter(Collision collision) {
 		boredomClock.increaseClock(10);
 		Destroy(gameObject);
     }

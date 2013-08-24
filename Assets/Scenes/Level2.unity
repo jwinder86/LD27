@@ -1568,7 +1568,7 @@ SphereCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 358568060}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: .889999986
@@ -1776,7 +1776,7 @@ Transform:
   m_GameObject: {fileID: 441554820}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 80.1872635, y: 124.127243, z: 0}
-  m_LocalScale: {x: 200, y: 3, z: 10}
+  m_LocalScale: {x: 200, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
 --- !u!1 &449850172
@@ -2306,7 +2306,7 @@ SphereCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 594757298}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: .889999986
@@ -2380,8 +2380,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 613482464}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 111.195496, y: 52.6348648, z: 0}
-  m_LocalScale: {x: 95, y: 3, z: 10}
+  m_LocalPosition: {x: 112.608788, y: 54.0481606, z: 0}
+  m_LocalScale: {x: 95, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
 --- !u!1 &632364680
@@ -3496,6 +3496,10 @@ Prefab:
       propertyPath: boredomClock
       value: 
       objectReference: {fileID: 1708176487}
+    - target: {fileID: 13500000, guid: f111a5092814dfc459bfa893877eb1a8, type: 2}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f111a5092814dfc459bfa893877eb1a8, type: 2}
   m_RootGameObject: {fileID: 1655815249}
@@ -3695,8 +3699,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1018035736}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 91.695015, y: 23.5945358, z: 0}
-  m_LocalScale: {x: 100, y: 3, z: 10}
+  m_LocalPosition: {x: 91.2254715, y: 24.0640945, z: 0}
+  m_LocalScale: {x: 100, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
 --- !u!1 &1030803506
@@ -3755,7 +3759,7 @@ SphereCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1030803506}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: .889999986
@@ -4381,7 +4385,7 @@ SphereCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1274554336}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: .889999986
@@ -4577,8 +4581,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1300576287}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 80.7255173, y: -1.28812027, z: 0}
-  m_LocalScale: {x: 200, y: 3, z: 10}
+  m_LocalPosition: {x: 81.1973953, y: -3.17096329, z: 0}
+  m_LocalScale: {x: 200, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
 --- !u!1 &1323005601
@@ -5376,10 +5380,10 @@ SphereCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1489968730}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: .889999986
+  m_Radius: .949999988
   m_Center: {x: 0, y: .25, z: 0}
 --- !u!33 &1489968735
 MeshFilter:
@@ -5930,7 +5934,7 @@ SphereCollider:
   m_PrefabInternal: {fileID: 972542994}
   m_GameObject: {fileID: 1655815249}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: .889999986
@@ -6109,7 +6113,7 @@ SphereCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1686448890}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: .889999986
@@ -6371,7 +6375,7 @@ SphereCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1804072598}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: .889999986
@@ -6591,7 +6595,7 @@ SphereCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1941153239}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: .889999986
@@ -7064,7 +7068,7 @@ SphereCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2081333997}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: .889999986
