@@ -6,10 +6,14 @@ using System.Collections;
 public class PigBehaviour : MonoBehaviour {
 	
 	public float runSpeed;
+	public float airSpeed;
 	public float jumpSpeed;
 	public RocketBehaviour rocketPrefab;
 	
+	public FeetCollider feetCollider;
+	
 	private bool ridingRocket;
+	private bool onGround;
 	private RocketBehaviour rocket;
 	private Vector3 screenCenter;
 	
@@ -28,14 +32,22 @@ public class PigBehaviour : MonoBehaviour {
 		
 		if (!ridingRocket) {
 			// move left and right
-			if (Input.GetAxis("Horizontal") < 0f) {
-				rigidbody.velocity = new Vector3(-runSpeed, rigidbody.velocity.y, 0f);
-			} else if (Input.GetAxis("Horizontal") > 0f) {
-				rigidbody.velocity = new Vector3(runSpeed, rigidbody.velocity.y, 0f);
+			if (feetCollider.OnGround()) {
+				if (Input.GetAxis("Horizontal") < 0f) {
+					rigidbody.velocity = new Vector3(-runSpeed, rigidbody.velocity.y, 0f);
+				} else if (Input.GetAxis("Horizontal") > 0f) {
+					rigidbody.velocity = new Vector3(runSpeed, rigidbody.velocity.y, 0f);
+				}
+			} else {
+				if (Input.GetAxis("Horizontal") < 0f) {
+					rigidbody.AddForce(new Vector3(-airSpeed, 0f, 0f), ForceMode.Acceleration);
+				} else if (Input.GetAxis("Horizontal") > 0f) {
+					rigidbody.AddForce(new Vector3(airSpeed * 2f, 0f, 0f), ForceMode.Acceleration);
+				}
 			}
 			
 			// jump
-			if (Input.GetButtonDown("Jump")) {
+			if (Input.GetButtonDown("Jump") && feetCollider.OnGround()) {
 				rigidbody.velocity = new Vector3(rigidbody.velocity.x, jumpSpeed, 0f);
 			}
 			
