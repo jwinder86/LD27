@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class BoredomClock : TriggerBehaviour {
+public class BoredomClock : MonoBehaviour {
 	
 	float boredom;
 	float boredomMax = 11;
@@ -24,9 +24,9 @@ public class BoredomClock : TriggerBehaviour {
 		Debug.Log(boredom);
 		
 		// TODO: need to update this block to be a real trigger thing
-		if(Input.GetButton("Jump")){
-			increaseClock(smallIncrease);
-		}
+		//if(Input.GetButton("Jump")){
+		//	increaseClock(smallIncrease);
+		//}
 		
 		// don't allow the boredom clock to be higher than boredomMax
 		if(boredom > boredomMax){
@@ -42,14 +42,12 @@ public class BoredomClock : TriggerBehaviour {
 	}
 	
 	
-	void increaseClock(float amount){
+	public void increaseClock(float amount){
 		boredom += amount;
 		Debug.Log("more time: " + amount);
 	}
 	
 	
-	public override void Trigger() {
-		increaseClock(smallIncrease);
-	}
+
 	
 }
