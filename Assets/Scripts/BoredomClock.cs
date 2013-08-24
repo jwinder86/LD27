@@ -8,9 +8,15 @@ public class BoredomClock : MonoBehaviour {
 	
 	private float boredom;
 	
+	private PigBehaviour pig;
+	private bool gameRunning;
+	
 	// Use this for initialization
 	void Start () {
 		boredom = boredomMax;
+		gameRunning = true;
+		
+		pig = (PigBehaviour) FindObjectOfType(typeof(PigBehaviour));
 	}
 	
 	// Update is called once per frame
@@ -20,6 +26,7 @@ public class BoredomClock : MonoBehaviour {
 			boredom = boredom - Time.deltaTime;
 		} else {
 			boredom = 0f;
+			GameOver();
 		}
 		
 		// don't allow the boredom clock to be higher than boredomMax
@@ -33,10 +40,14 @@ public class BoredomClock : MonoBehaviour {
 	
 	public void increaseClock(float amount){
 		boredom += amount;
-		Debug.Log("more time: " + amount);
 	}
 	
 	
-
+	private void GameOver() {
+		if (gameRunning) {
+			gameRunning = false;
+			pig.Die();
+		}
+	}
 	
 }

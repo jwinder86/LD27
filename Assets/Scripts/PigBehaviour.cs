@@ -14,6 +14,7 @@ public class PigBehaviour : MonoBehaviour {
 	
 	private bool ridingRocket;
 	private bool onGround;
+	private bool isDead;
 	private RocketBehaviour rocket;
 	private Vector3 screenCenter;
 	
@@ -21,47 +22,50 @@ public class PigBehaviour : MonoBehaviour {
 	void Start () {
 		screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0f);
 		ridingRocket = false;
+		isDead = false;
 		rocket = null;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
-		Vector3 aimDir = (Input.mousePosition - screenCenter).normalized;
-		Debug.DrawLine(transform.position, transform.position + aimDir * 4);
-		
-		if (!ridingRocket) {
-			// move left and right
-			if (feetCollider.OnGround()) {
-				if (Input.GetAxis("Horizontal") < 0f) {
-					rigidbody.velocity = new Vector3(-runSpeed, rigidbody.velocity.y, 0f);
-				} else if (Input.GetAxis("Horizontal") > 0f) {
-					rigidbody.velocity = new Vector3(runSpeed, rigidbody.velocity.y, 0f);
+		if (!isDead) {
+			Vector3 aimDir = (Input.mousePosition - screenCenter).normalized;
+			Debug.DrawLine(transform.position, transform.position + aimDir * 4);
+			
+			if (!ridingRocket) {
+				// move left and right
+				if (feetCollider.OnGround()) {
+					if (Input.GetAxis("Horizontal") < 0f) {
+						rigidbody.velocity = new Vector3(-runSpeed, rigidbody.velocity.y, 0f);
+					} else if (Input.GetAxis("Horizontal") > 0f) {
+						rigidbody.velocity = new Vector3(runSpeed, rigidbody.velocity.y, 0f);
+					}
+				} else {
+					if (Input.GetAxis("Horizontal") < 0f) {
+						rigidbody.AddForce(new Vector3(-airSpeed, 0f, 0f), ForceMode.Acceleration);
+					} else if (Input.GetAxis("Horizontal") > 0f) {
+						rigidbody.AddForce(new Vector3(airSpeed * 2f, 0f, 0f), ForceMode.Acceleration);
+					}
 				}
+				
+				// jump
+				if (Input.GetButtonDown("Jump") && feetCollider.OnGround()) {
+					rigidbody.velocity = new Vector3(rigidbody.velocity.x, jumpSpeed, 0f);
+				}
+				
+				// fire rocket
+				if (Input.GetButtonDown("Fire1") || Input.GetButtonDown("Fire2")) {
+					float angle = Mathf.Rad2Deg * Mathf.Atan2(-aimDir.y, aimDir.x);
+					FireRocket(angle, Input.GetButtonDown("Fire2"));
+				}
+				
 			} else {
-				if (Input.GetAxis("Horizontal") < 0f) {
-					rigidbody.AddForce(new Vector3(-airSpeed, 0f, 0f), ForceMode.Acceleration);
-				} else if (Input.GetAxis("Horizontal") > 0f) {
-					rigidbody.AddForce(new Vector3(airSpeed * 2f, 0f, 0f), ForceMode.Acceleration);
+				// jump
+				if (Input.GetButtonDown("Jump")) {
+					AbandonRocket();
+					rigidbody.velocity = new Vector3(rigidbody.velocity.x, rigidbody.velocity.y + jumpSpeed, 0f);
 				}
-			}
-			
-			// jump
-			if (Input.GetButtonDown("Jump") && feetCollider.OnGround()) {
-				rigidbody.velocity = new Vector3(rigidbody.velocity.x, jumpSpeed, 0f);
-			}
-			
-			// fire rocket
-			if (Input.GetButtonDown("Fire1") || Input.GetButtonDown("Fire2")) {
-				float angle = Mathf.Rad2Deg * Mathf.Atan2(-aimDir.y, aimDir.x);
-				FireRocket(angle, Input.GetButtonDown("Fire2"));
-			}
-			
-		} else {
-			// jump
-			if (Input.GetButtonDown("Jump")) {
-				AbandonRocket();
-				rigidbody.velocity = new Vector3(rigidbody.velocity.x, rigidbody.velocity.y + jumpSpeed, 0f);
 			}
 		}
 	}
@@ -84,10 +88,25 @@ public class PigBehaviour : MonoBehaviour {
 	public void AbandonRocket() {
 		ridingRocket = false;
 		transform.parent = null;
-		transform.localRotation = Quaternion.Euler(new Vector3(0f, 90f, 0f));
 		rigidbody.isKinematic = false;
 		rigidbody.velocity = rocket.rigidbody.velocity;
 		
+		if (!isDead) {
+			transform.localRotation = Quaternion.Euler(new Vector3(0f, 90f, 0f));
+		}
+		
 		rocket.SetControlRocket(false);
+	}
+	
+	public void Die() {
+		if (!isDead) {
+			isDead = true;
+			
+			if (ridingRocket) {
+				AbandonRocket();
+			}
+			
+			transform.rigidbody.constraints = RigidbodyConstraints.None;
+		}
 	}
 }
