@@ -489,7 +489,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   runSpeed: 10
   airSpeed: 10
-  jumpSpeed: 10
+  jumpSpeed: 20
+  stunTime: 2
   rocketPrefab: {fileID: 11400000, guid: 786ecabe9c2df414d8902c1a6aa1bfda, type: 2}
   feetCollider: {fileID: 11400002}
 --- !u!114 &11400002

@@ -3,9 +3,12 @@ using System.Collections;
 
 [RequireComponent (typeof(ParticleSystem))]
 [RequireComponent (typeof(AudioSource))]
+[RequireComponent (typeof(Collider))]
 public class ExplosionBehaviour : MonoBehaviour {
 	
 	public AudioClip explosionSound;
+	
+	public float explosionForce;
 	
 	// Use this for initialization
 	void Start () {
@@ -25,8 +28,26 @@ public class ExplosionBehaviour : MonoBehaviour {
 		particleSystem.Play();
 		audio.PlayOneShot(explosionSound);
 		
-		yield return new WaitForSeconds(2);
+		yield return new WaitForSeconds(0.2f);
+		
+		collider.enabled = false;
+		
+		yield return new WaitForSeconds(2f);
 		
 		Destroy(gameObject);
+	}
+	
+	public void OnTriggerEnter(Collider other) {
+		PigBehaviour pig = other.GetComponent<PigBehaviour>();
+		
+		if (pig != null) {
+			pig.Stun();
+		}
+		
+		if (other.rigidbody != null) {
+			Vector3 direction = (other.transform.position - transform.position).normalized;
+			
+			other.rigidbody.AddForce(direction * explosionForce, ForceMode.VelocityChange);
+		}
 	}
 }

@@ -8,6 +8,8 @@ public class PigBehaviour : MonoBehaviour {
 	public float runSpeed;
 	public float airSpeed;
 	public float jumpSpeed;
+	public float stunTime;
+	
 	public RocketBehaviour rocketPrefab;
 	
 	public FeetCollider feetCollider;
@@ -15,6 +17,10 @@ public class PigBehaviour : MonoBehaviour {
 	private bool ridingRocket;
 	private bool onGround;
 	private bool isDead;
+	private float stunTimer;
+	
+	private RigidbodyConstraints initialConstraints;
+	
 	private RocketBehaviour rocket;
 	private Vector3 screenCenter;
 	
@@ -23,13 +29,17 @@ public class PigBehaviour : MonoBehaviour {
 		screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0f);
 		ridingRocket = false;
 		isDead = false;
+		stunTimer = 0f;
+		
+		initialConstraints = rigidbody.constraints;
+		
 		rocket = null;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
-		if (!isDead) {
+		if (!isDead && stunTimer <= 0f) {
 			Vector3 aimDir = (Input.mousePosition - screenCenter).normalized;
 			Debug.DrawLine(transform.position, transform.position + aimDir * 4);
 			
@@ -67,6 +77,12 @@ public class PigBehaviour : MonoBehaviour {
 					rigidbody.velocity = new Vector3(rigidbody.velocity.x, rigidbody.velocity.y + jumpSpeed, 0f);
 				}
 			}
+		} else if (stunTimer > 0f) {
+			stunTimer -= Time.deltaTime;
+			
+			if (stunTimer <= 0f) {
+				Recover();
+			}
 		}
 	}
 	
@@ -91,11 +107,30 @@ public class PigBehaviour : MonoBehaviour {
 		rigidbody.isKinematic = false;
 		rigidbody.velocity = rocket.rigidbody.velocity;
 		
-		if (!isDead) {
+		if (!isDead && stunTimer <= 0f) {
 			transform.localRotation = Quaternion.Euler(new Vector3(0f, 90f, 0f));
 		}
 		
 		rocket.SetControlRocket(false);
+	}
+	
+	public void Stun() {
+		stunTimer = stunTime;
+		
+		if (ridingRocket) {
+			AbandonRocket();
+		}
+		
+		rigidbody.constraints = RigidbodyConstraints.FreezePositionZ;
+	}
+	
+	private void Recover() {
+		stunTimer = 0f;
+		
+		if (!isDead) {
+			rigidbody.constraints = initialConstraints;
+			transform.localRotation = Quaternion.Euler(new Vector3(0f, 90f, 0f));
+		}
 	}
 	
 	public void Die() {
@@ -106,7 +141,7 @@ public class PigBehaviour : MonoBehaviour {
 				AbandonRocket();
 			}
 			
-			transform.rigidbody.constraints = RigidbodyConstraints.None;
+			transform.rigidbody.constraints = RigidbodyConstraints.FreezePositionZ;
 		}
 	}
 }
