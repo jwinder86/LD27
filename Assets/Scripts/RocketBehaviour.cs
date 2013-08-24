@@ -21,9 +21,13 @@ public class RocketBehaviour : MonoBehaviour {
 	private bool controlRocket = false;
 	private bool exploded;
 	
+	private BoredomClock boredomClock;
+	
 	// Use this for initialization
 	void Start () {
 		exploded = false;
+		
+		boredomClock = (BoredomClock) FindObjectOfType(typeof(BoredomClock));
 		
 		audio.PlayOneShot(thrustSound);
 		
