@@ -47,7 +47,13 @@ public class BoredomClock : MonoBehaviour {
 		if (gameRunning) {
 			gameRunning = false;
 			pig.Die();
+			
+			StartCoroutine(ReloadLevel());
 		}
 	}
 	
+	private IEnumerator ReloadLevel() {
+		yield return new WaitForSeconds(5f);
+		Application.LoadLevel(Application.loadedLevel);
+	}
 }
