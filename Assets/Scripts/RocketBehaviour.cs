@@ -9,6 +9,8 @@ public class RocketBehaviour : MonoBehaviour {
 	public float turnSpeedDegrees;
 	public float acceleration;
 	
+	public ExplosionBehaviour explosionPrefab;
+	
 	private bool controlRocket = false;
 	
 	// Use this for initialization
@@ -36,5 +38,11 @@ public class RocketBehaviour : MonoBehaviour {
 	public void SetControlRocket(bool control) {
 		this.controlRocket = control;
 		Debug.Log ("Control: " + controlRocket);
+	}
+	
+	public void OnCollisionEnter(Collision collision) {
+		ExplosionBehaviour explosion = (ExplosionBehaviour) Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+		explosion.Explode();
+		Destroy(gameObject);
 	}
 }
