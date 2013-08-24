@@ -4,13 +4,15 @@ using System.Collections;
 public class BoredomClock : MonoBehaviour {
 	
 	float boredom;
-	float boredomMax = 10;
+	float boredomMax = 11;
 	float smallIncrease = 5;
 	float largeIncrease = 10;
-	
+	TextMesh boredomText;
 	// Use this for initialization
 	void Start () {
 		boredom = boredomMax;
+		boredomText = GetComponent<TextMesh>();
+
 	}
 	
 	// Update is called once per frame
@@ -34,6 +36,9 @@ public class BoredomClock : MonoBehaviour {
 		
 		if (boredom <= 0.01f){
 			Debug.Log("DEAD");
+			boredomText.text = "DEAD";
+		}else{			
+			boredomText.text = ((int)boredom).ToString();
 		}
 	}
 }
