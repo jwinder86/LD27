@@ -10,6 +10,8 @@ public class RocketBehaviour : MonoBehaviour {
 	public float acceleration;
 	private Vector3 screenCenter;
 	
+	private bool controlRocket = false;
+	
 	// Use this for initialization
 	void Start () {
 		screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0f);
@@ -21,15 +23,19 @@ public class RocketBehaviour : MonoBehaviour {
 		Vector3 direction = transform.forward;
 		rigidbody.AddForce(direction * acceleration, ForceMode.Acceleration);
 		
-		Debug.Log(direction);
-		
-		// rotate towards mouse
-		if (Input.GetAxis("Horizontal") < 0) {
-			transform.RotateAround(transform.position, -transform.right, turnSpeedDegrees * Time.deltaTime);
-		} else if (Input.GetAxis("Horizontal") > 0) {
-			transform.RotateAround(transform.position, -transform.right, -turnSpeedDegrees * Time.deltaTime);
+		// rotate
+		//Debug.Log(controlRocket);
+		if (controlRocket) {
+			if (Input.GetAxis("Horizontal") < 0) {
+				transform.RotateAround(transform.position, -transform.right, turnSpeedDegrees * Time.deltaTime);
+			} else if (Input.GetAxis("Horizontal") > 0) {
+				transform.RotateAround(transform.position, -transform.right, -turnSpeedDegrees * Time.deltaTime);
+			}
 		}
-		
-		//rigidbody.velocity = rigidbody.velocity.magnitude * transform.forward;
+	}
+	
+	public void SetControlRocket(bool control) {
+		this.controlRocket = control;
+		Debug.Log ("Control: " + controlRocket);
 	}
 }
