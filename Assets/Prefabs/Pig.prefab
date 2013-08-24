@@ -489,7 +489,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   runSpeed: 10
   airSpeed: 10
-  jumpSpeed: 5
+  jumpSpeed: 10
   rocketPrefab: {fileID: 11400000, guid: 786ecabe9c2df414d8902c1a6aa1bfda, type: 2}
   feetCollider: {fileID: 11400002}
 --- !u!114 &11400002
@@ -503,6 +503,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f27d9f1e5dd42684cadcb0410a3621f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  groundDuration: .200000003
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1
