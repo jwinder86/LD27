@@ -8,13 +8,12 @@ public class RocketBehaviour : MonoBehaviour {
 	public float turnAngleThreshold;
 	public float turnSpeedDegrees;
 	public float acceleration;
-	private Vector3 screenCenter;
 	
 	private bool controlRocket = false;
 	
 	// Use this for initialization
 	void Start () {
-		screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0f);
+		
 	}
 	
 	// Update is called once per frame
