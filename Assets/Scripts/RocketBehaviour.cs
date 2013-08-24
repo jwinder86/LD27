@@ -5,17 +5,24 @@ using System.Collections;
 [RequireComponent (typeof(Collider))]
 public class RocketBehaviour : MonoBehaviour {
 	
+	public float rocketLifetime;
 	public float turnAngleThreshold;
 	public float turnSpeedDegrees;
 	public float acceleration;
 	
+	public ParticleSystem particleSystem;
+	public Transform model;
+	
 	public ExplosionBehaviour explosionPrefab;
 	
 	private bool controlRocket = false;
+	private bool exploded;
 	
 	// Use this for initialization
 	void Start () {
+		exploded = false;
 		
+		StartCoroutine(LifetimeAction());
 	}
 	
 	// Update is called once per frame
@@ -41,15 +48,40 @@ public class RocketBehaviour : MonoBehaviour {
 	}
 	
 	public void OnCollisionEnter(Collision collision) {
-		ExplosionBehaviour explosion = (ExplosionBehaviour) Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-		explosion.Explode();
-		
-		// remove pigs from rockets
-		PigBehaviour[] pigs = GetComponentsInChildren<PigBehaviour>();
-		foreach(PigBehaviour pig in pigs) {
-			pig.AbandonRocket();
+		Explode();
+	}
+	
+	private void Explode() {
+		if (!exploded) {
+			exploded = true;
+			
+			ExplosionBehaviour explosion = (ExplosionBehaviour) Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+			explosion.Explode();
+			
+			// remove pigs from rockets
+			PigBehaviour[] pigs = GetComponentsInChildren<PigBehaviour>();
+			foreach(PigBehaviour pig in pigs) {
+				pig.AbandonRocket();
+			}
+			
+			// disable
+			particleSystem.Stop();
+			collider.enabled = false;
+			rigidbody.isKinematic = true;
+			Destroy(model.gameObject);
 		}
 		
+		// destroy later
+		StartCoroutine(DestroyAction());
+	}
+	
+	private IEnumerator LifetimeAction() {
+		yield return new WaitForSeconds(rocketLifetime);
+		Explode ();
+	}
+	
+	private IEnumerator DestroyAction() {
+		yield return new WaitForSeconds(4f);
 		Destroy(gameObject);
 	}
 }
