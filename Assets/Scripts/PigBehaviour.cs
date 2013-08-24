@@ -69,7 +69,7 @@ public class PigBehaviour : MonoBehaviour {
 		}
 	}
 	
-	private void AbandonRocket() {
+	public void AbandonRocket() {
 		ridingRocket = false;
 		transform.parent = null;
 		transform.localRotation = Quaternion.Euler(new Vector3(0f, 90f, 0f));

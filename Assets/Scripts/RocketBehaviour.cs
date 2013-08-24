@@ -43,6 +43,13 @@ public class RocketBehaviour : MonoBehaviour {
 	public void OnCollisionEnter(Collision collision) {
 		ExplosionBehaviour explosion = (ExplosionBehaviour) Instantiate(explosionPrefab, transform.position, Quaternion.identity);
 		explosion.Explode();
+		
+		// remove pigs from rockets
+		PigBehaviour[] pigs = GetComponentsInChildren<PigBehaviour>();
+		foreach(PigBehaviour pig in pigs) {
+			pig.AbandonRocket();
+		}
+		
 		Destroy(gameObject);
 	}
 }
