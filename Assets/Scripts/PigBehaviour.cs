@@ -74,6 +74,7 @@ public class PigBehaviour : MonoBehaviour {
 		transform.parent = null;
 		transform.localRotation = Quaternion.Euler(new Vector3(0f, 90f, 0f));
 		rigidbody.isKinematic = false;
+		rigidbody.velocity = rocket.rigidbody.velocity;
 		
 		rocket.SetControlRocket(false);
 	}
