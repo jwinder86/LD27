@@ -3,6 +3,7 @@ using System.Collections;
 
 [RequireComponent (typeof(Rigidbody))]
 [RequireComponent (typeof(Collider))]
+[RequireComponent (typeof(AudioSource))]
 public class RocketBehaviour : MonoBehaviour {
 	
 	public float rocketLifetime;
@@ -15,12 +16,16 @@ public class RocketBehaviour : MonoBehaviour {
 	
 	public ExplosionBehaviour explosionPrefab;
 	
+	public AudioClip thrustSound;
+	
 	private bool controlRocket = false;
 	private bool exploded;
 	
 	// Use this for initialization
 	void Start () {
 		exploded = false;
+		
+		audio.PlayOneShot(thrustSound);
 		
 		StartCoroutine(LifetimeAction());
 	}
@@ -69,6 +74,7 @@ public class RocketBehaviour : MonoBehaviour {
 			collider.enabled = false;
 			rigidbody.isKinematic = true;
 			Destroy(model.gameObject);
+			audio.Stop();
 		}
 		
 		// destroy later
