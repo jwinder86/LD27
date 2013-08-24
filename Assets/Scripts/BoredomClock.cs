@@ -3,7 +3,7 @@ using System.Collections;
 
 public class BoredomClock : MonoBehaviour {
 	
-	public float boredomMax = 11;
+	public float boredomMax = 10f;
 	public TimerBarBehaviour display;
 	
 	private float boredom;
@@ -16,8 +16,10 @@ public class BoredomClock : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	 	
-		if(boredom > 0){
+		if(boredom > 0f){
 			boredom = boredom - Time.deltaTime;
+		} else {
+			boredom = 0f;
 		}
 		
 		// don't allow the boredom clock to be higher than boredomMax
