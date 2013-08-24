@@ -2,8 +2,11 @@
 using System.Collections;
 
 [RequireComponent (typeof(ParticleSystem))]
+[RequireComponent (typeof(AudioSource))]
 public class ExplosionBehaviour : MonoBehaviour {
-
+	
+	public AudioClip explosionSound;
+	
 	// Use this for initialization
 	void Start () {
 		
@@ -20,6 +23,7 @@ public class ExplosionBehaviour : MonoBehaviour {
 	
 	private IEnumerator ExplodeAction() {
 		particleSystem.Play();
+		audio.PlayOneShot(explosionSound);
 		
 		yield return new WaitForSeconds(2);
 		
