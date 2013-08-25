@@ -18,6 +18,8 @@ public class PigBehaviour : MonoBehaviour {
 	
 	public FeetCollider feetCollider;
 	
+	public Transform launcher;
+	
 	public Transform crosshair;
 	
 	private bool ridingRocket;
@@ -49,12 +51,22 @@ public class PigBehaviour : MonoBehaviour {
 	}
 	
 	void LateUpdate() {
+		float aimAngle = 0f;
 		Vector3 mouseTarget = GetMouseTarget();
-			if (mouseTarget != Vector3.zero) {
-				crosshair.position = mouseTarget;
-			} else {
-				crosshair.position = transform.position + shoulderPos + new Vector3(5f, 0f, 0f);
-			}
+		if (mouseTarget != Vector3.zero) {
+			crosshair.position = mouseTarget;
+			Vector3 aimDir = (mouseTarget - (transform.position + shoulderPos)).normalized;
+			aimAngle = Mathf.Rad2Deg * Mathf.Atan2(aimDir.y, aimDir.x);
+		} else {
+			crosshair.position = transform.position + shoulderPos + new Vector3(5f, 0f, 0f);
+		}
+		
+		if (ridingRocket) {
+			launcher.renderer.enabled = false;
+		} else {
+			launcher.renderer.enabled = true;
+			launcher.transform.localEulerAngles = new Vector3(0f, 90f, aimAngle);
+		}
 	}
 	
 	// Update is called once per frame
@@ -79,18 +91,18 @@ public class PigBehaviour : MonoBehaviour {
 						rigidbody.velocity = new Vector3(runSpeed, rigidbody.velocity.y, 0f);
 						animation.Play("RunAnimation", PlayMode.StopAll);
 					} else {
-						animation.Stop();
+						animation.Play("StandAnimation", PlayMode.StopAll);
 					}
 					
 				} else {
 					if (Input.GetAxis("Horizontal") < 0f) {
 						rigidbody.AddForce(new Vector3(-airSpeed, 0f, 0f), ForceMode.Acceleration);
-						animation.Play("StunAnimation", PlayMode.StopAll);
+						animation.Play("StandAnimation", PlayMode.StopAll);
 					} else if (Input.GetAxis("Horizontal") > 0f) {
 						rigidbody.AddForce(new Vector3(airSpeed * 2f, 0f, 0f), ForceMode.Acceleration);
-						animation.Play("StunAnimation", PlayMode.StopAll);
+						animation.Play("StandAnimation", PlayMode.StopAll);
 					} else {
-						animation.Play("StunAnimation", PlayMode.StopAll);	
+						animation.Play("StandAnimation", PlayMode.StopAll);	
 					}
 					
 				}
@@ -132,10 +144,10 @@ public class PigBehaviour : MonoBehaviour {
 			ridingRocket = true;
 			transform.parent = rocket.transform;
 			rigidbody.isKinematic = true;
-			transform.localPosition = new Vector3(0f, 0.6f, -2f);
-			transform.localRotation = Quaternion.Euler(new Vector3(80f, 0f, 0f));
+			transform.localPosition = new Vector3(0f, 0.4f, -2f);
+			transform.localRotation = Quaternion.Euler(new Vector3(90f, 0f, 0f));
 			
-			animation.Play("StunAnimation", PlayMode.StopAll);
+			animation.Play("StandAnimation", PlayMode.StopAll);
 		}
 	}
 	
@@ -162,7 +174,7 @@ public class PigBehaviour : MonoBehaviour {
 			transform.localRotation = Quaternion.Euler(new Vector3(0f, -180f, 0f));
 		}
 		
-		animation.Play("StunAnimation", PlayMode.StopAll);
+		animation.Play("StandAnimation", PlayMode.StopAll);
 		rigidbody.constraints = RigidbodyConstraints.FreezePositionZ;
 		rigidbody.AddTorque(Random.rotation.eulerAngles, ForceMode.VelocityChange);
 	}
@@ -187,7 +199,7 @@ public class PigBehaviour : MonoBehaviour {
 				transform.localRotation = Quaternion.Euler(new Vector3(0f, -180f, 0f));
 			}
 			
-			animation.Play("StunAnimation", PlayMode.StopAll);
+			animation.Play("StandAnimation", PlayMode.StopAll);
 			transform.rigidbody.constraints = RigidbodyConstraints.FreezePositionZ;
 			rigidbody.AddTorque(Random.rotation.eulerAngles, ForceMode.VelocityChange);
 			
