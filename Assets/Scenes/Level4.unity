@@ -497,6 +497,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destructionSound: {fileID: 8300000, guid: d52b7886c1cde9b4b82c4f8503e518c9, type: 3}
+  explosionPrefab: {fileID: 11400000, guid: 65d5a2ad39ae2364d8851499d7eadbe6, type: 2}
 --- !u!54 &43639737
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1912,6 +1913,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destructionSound: {fileID: 8300000, guid: d52b7886c1cde9b4b82c4f8503e518c9, type: 3}
+  explosionPrefab: {fileID: 11400000, guid: 65d5a2ad39ae2364d8851499d7eadbe6, type: 2}
 --- !u!54 &298351073
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2546,6 +2548,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destructionSound: {fileID: 8300000, guid: d52b7886c1cde9b4b82c4f8503e518c9, type: 3}
+  explosionPrefab: {fileID: 11400000, guid: 65d5a2ad39ae2364d8851499d7eadbe6, type: 2}
 --- !u!54 &419221163
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2899,6 +2902,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destructionSound: {fileID: 8300000, guid: d52b7886c1cde9b4b82c4f8503e518c9, type: 3}
+  explosionPrefab: {fileID: 11400000, guid: 65d5a2ad39ae2364d8851499d7eadbe6, type: 2}
 --- !u!54 &478922970
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3873,6 +3877,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destructionSound: {fileID: 8300000, guid: d52b7886c1cde9b4b82c4f8503e518c9, type: 3}
+  explosionPrefab: {fileID: 11400000, guid: 65d5a2ad39ae2364d8851499d7eadbe6, type: 2}
 --- !u!82 &626082671
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6117,6 +6122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destructionSound: {fileID: 8300000, guid: d52b7886c1cde9b4b82c4f8503e518c9, type: 3}
+  explosionPrefab: {fileID: 11400000, guid: 65d5a2ad39ae2364d8851499d7eadbe6, type: 2}
 --- !u!54 &830772790
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -8494,6 +8500,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destructionSound: {fileID: 8300000, guid: d52b7886c1cde9b4b82c4f8503e518c9, type: 3}
+  explosionPrefab: {fileID: 11400000, guid: 65d5a2ad39ae2364d8851499d7eadbe6, type: 2}
 --- !u!82 &1069694254
 AudioSource:
   m_ObjectHideFlags: 0
@@ -10748,6 +10755,10 @@ Prefab:
       propertyPath: m_Name
       value: Timer
       objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 069c2a138b0d3024a93f41a3f9d2c9df, type: 2}
+      propertyPath: nextLevel
+      value: Level5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 069c2a138b0d3024a93f41a3f9d2c9df, type: 2}
   m_RootGameObject: {fileID: 1561564793}
@@ -11876,6 +11887,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boredomMax: 10
   display: {fileID: 1561564795}
+  nextLevel: Level5
 --- !u!1 &1563429765
 GameObject:
   m_ObjectHideFlags: 0
@@ -13104,6 +13116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destructionSound: {fileID: 8300000, guid: d52b7886c1cde9b4b82c4f8503e518c9, type: 3}
+  explosionPrefab: {fileID: 11400000, guid: 65d5a2ad39ae2364d8851499d7eadbe6, type: 2}
 --- !u!23 &1585925335
 Renderer:
   m_ObjectHideFlags: 0
@@ -14500,9 +14513,9 @@ Transform:
   - {fileID: 1952971346}
   - {fileID: 1642810367}
   - {fileID: 453429214}
+  - {fileID: 2019430335}
   - {fileID: 220266922}
   - {fileID: 1689935192}
-  - {fileID: 2019430335}
   - {fileID: 1838349142}
   - {fileID: 1604581811}
   - {fileID: 592645110}

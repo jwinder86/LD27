@@ -11,6 +11,8 @@ public class BoredomClock : MonoBehaviour {
 	private PigBehaviour pig;
 	private bool gameRunning;
 	
+	public string nextLevel;
+	
 	// Use this for initialization
 	void Start () {
 		boredom = boredomMax;
@@ -61,9 +63,16 @@ public class BoredomClock : MonoBehaviour {
 	
 	public void WinGame() {
 			gameRunning = false;		
-			StartCoroutine(ReloadLevel());
+			StartCoroutine(loadNextLevel());
+		
+		
 	}
 	
+	
+	private IEnumerator loadNextLevel() {
+		yield return new WaitForSeconds(5f);
+		Application.LoadLevel(nextLevel);
+	}
 	
 	private IEnumerator ReloadLevel() {
 		yield return new WaitForSeconds(5f);
