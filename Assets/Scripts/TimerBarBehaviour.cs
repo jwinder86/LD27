@@ -5,6 +5,7 @@ public class TimerBarBehaviour : MonoBehaviour {
 	
 	public Transform bar;
 	public TextMesh text;
+	public GameObject[] rocketDisplay;
 	
 	public Color fullColor;
 	public Color emptyColor;
@@ -30,5 +31,13 @@ public class TimerBarBehaviour : MonoBehaviour {
 		bar.renderer.enabled = fraction > 0f;
 		text.text = value.ToString("F2");
 		text.color = Color.Lerp(emptyColor, fullColor, fraction);
+	}
+	
+	public void setRocketCount(int rockets) {
+		Mathf.Clamp(rockets, 0, 5);
+		
+		for (int i = 0; i < 5; i++) {
+			rocketDisplay[i].renderer.enabled = (i < rockets);
+		}
 	}
 }

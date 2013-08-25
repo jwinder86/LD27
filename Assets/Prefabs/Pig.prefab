@@ -494,6 +494,8 @@ MonoBehaviour:
   launcher: {fileID: 400010}
   crosshair: {fileID: 0}
   deathSound: {fileID: 8300000, guid: ebc97fcc7a48ef54ba074fd057da7ecc, type: 3}
+  rocketMax: 5
+  rocketRechargePerSecond: 1
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

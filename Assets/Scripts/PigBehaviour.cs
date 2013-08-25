@@ -24,10 +24,14 @@ public class PigBehaviour : MonoBehaviour {
 	
 	public AudioClip deathSound;
 	
+	public float rocketMax = 5;
+	public float rocketRechargePerSecond = 0.5f;
+	
 	private bool ridingRocket;
 	private bool onGround;
 	private bool isDead;
 	private float stunTimer;
+	private float rocketCount;
 	
 	private RigidbodyConstraints initialConstraints;
 	
@@ -37,6 +41,7 @@ public class PigBehaviour : MonoBehaviour {
 	private Animation animation;
 	
 	private BoredomClock boredomClock;
+	private TimerBarBehaviour timerBar;
 	
 	// Use this for initialization
 	void Start () {
@@ -44,6 +49,7 @@ public class PigBehaviour : MonoBehaviour {
 		ridingRocket = false;
 		isDead = false;
 		stunTimer = 0f;
+		rocketCount = rocketMax;
 		
 		initialConstraints = rigidbody.constraints;
 		
@@ -52,6 +58,7 @@ public class PigBehaviour : MonoBehaviour {
 		rocket = null;
 		
 		boredomClock = (BoredomClock) FindObjectOfType(typeof(BoredomClock));
+		timerBar = (TimerBarBehaviour) FindObjectOfType(typeof(TimerBarBehaviour));
 	}
 	
 	void LateUpdate() {
@@ -117,7 +124,9 @@ public class PigBehaviour : MonoBehaviour {
 				}
 				
 				// fire rocket
-				if (Input.GetButtonDown("Fire1") || Input.GetButtonDown("Fire2")) {
+				if ((Input.GetButtonDown("Fire1") || Input.GetButtonDown("Fire2")) && rocketCount >= 1f) {
+					Debug.Log("RocketCount: " + rocketCount);
+					rocketCount -= 1f;
 					FireRocket(aimDir, Input.GetButtonDown("Fire2"));
 				}
 				
@@ -134,6 +143,11 @@ public class PigBehaviour : MonoBehaviour {
 			if (stunTimer <= 0f) {
 				Recover();
 			}
+		}
+		
+		if (!isDead) {
+			rocketCount = Mathf.Min(rocketCount + rocketRechargePerSecond * Time.deltaTime, rocketMax);
+			timerBar.setRocketCount((int)Mathf.Floor(rocketCount));
 		}
 	}
 	
