@@ -3,10 +3,11 @@ using System.Collections;
 
 public class SyringeTrigger : MonoBehaviour {
 	
-	public BoredomClock boredomClock;
 	
+	public BoredomClock boredomClock;
 	// Use this for initialization
 	void Start () {
+		BoredomClock boredomClock = (BoredomClock) FindObjectOfType(typeof(BoredomClock));
 	}
 	
 	// Update is called once per frame
@@ -16,6 +17,7 @@ public class SyringeTrigger : MonoBehaviour {
 	
 	 void OnTriggerEnter(Collider other) {
 		if(null != other.GetComponent("PigBehaviour")){
+			Debug.Log("more time!");
 			boredomClock.increaseClock(10);
 			Destroy(gameObject);
 		}
