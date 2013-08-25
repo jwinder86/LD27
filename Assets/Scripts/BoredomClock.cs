@@ -39,15 +39,17 @@ public class BoredomClock : MonoBehaviour {
 	
 	
 	public void increaseClock(float amount){
-		Debug.Log ("increasing time: " + amount + " = " + boredom);
-		boredom += amount;
-		Debug.Log ("increasing time: " + amount + " = " + boredom);
+		if (gameRunning) {
+			boredom += amount;
+			Debug.Log ("increasing time: " + amount + " = " + boredom);
+		}
 	}
 	
 	
-	private void GameOver() {
+	public void GameOver() {
 		if (gameRunning) {
 			gameRunning = false;
+			boredom = 0f;
 			pig.Die();
 			
 			StartCoroutine(ReloadLevel());

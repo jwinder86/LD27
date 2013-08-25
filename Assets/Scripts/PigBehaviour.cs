@@ -22,6 +22,8 @@ public class PigBehaviour : MonoBehaviour {
 	
 	public Transform crosshair;
 	
+	public AudioClip deathSound;
+	
 	private bool ridingRocket;
 	private bool onGround;
 	private bool isDead;
@@ -34,7 +36,7 @@ public class PigBehaviour : MonoBehaviour {
 	
 	private Animation animation;
 	
-	public AudioClip deathSound;
+	private BoredomClock boredomClock;
 	
 	// Use this for initialization
 	void Start () {
@@ -48,6 +50,8 @@ public class PigBehaviour : MonoBehaviour {
 		animation = GetComponentInChildren<Animation>();
 		
 		rocket = null;
+		
+		boredomClock = (BoredomClock) FindObjectOfType(typeof(BoredomClock));
 	}
 	
 	void LateUpdate() {
@@ -185,6 +189,7 @@ public class PigBehaviour : MonoBehaviour {
 		if (!isDead) {
 			rigidbody.constraints = initialConstraints;
 			transform.localRotation = Quaternion.Euler(new Vector3(0f, 90f, 0f));
+			transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
 		}
 	}
 	
@@ -203,6 +208,7 @@ public class PigBehaviour : MonoBehaviour {
 			transform.rigidbody.constraints = RigidbodyConstraints.FreezePositionZ;
 			rigidbody.AddTorque(Random.rotation.eulerAngles, ForceMode.VelocityChange);
 			
+			boredomClock.GameOver();
 		}
 	}
 	
