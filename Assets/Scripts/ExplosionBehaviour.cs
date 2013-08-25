@@ -28,7 +28,7 @@ public class ExplosionBehaviour : MonoBehaviour {
 		particleSystem.Play();
 		audio.PlayOneShot(explosionSound);
 		
-		yield return new WaitForSeconds(0.2f);
+		yield return new WaitForSeconds(0.5f);
 		
 		collider.enabled = false;
 		

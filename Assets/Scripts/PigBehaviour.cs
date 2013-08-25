@@ -8,6 +8,7 @@ public class PigBehaviour : MonoBehaviour {
 	
 	private static Plane plane = new Plane(new Vector3(0f, 0f, 1f), Vector3.zero);
 	private static Vector3 shoulderPos = new Vector3(0f, 1.5f, 0f);
+	private static float rotateTime = 0.4f;
 	
 	public float runSpeed;
 	public float airSpeed;
@@ -43,6 +44,8 @@ public class PigBehaviour : MonoBehaviour {
 	private BoredomClock boredomClock;
 	private TimerBarBehaviour timerBar;
 	
+	private bool facingRight;
+	
 	// Use this for initialization
 	void Start () {
 		screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0f);
@@ -60,6 +63,8 @@ public class PigBehaviour : MonoBehaviour {
 		boredomClock = (BoredomClock) FindObjectOfType(typeof(BoredomClock));
 		timerBar = (TimerBarBehaviour) FindObjectOfType(typeof(TimerBarBehaviour));
 		
+		facingRight = true;
+		
 		// XXX: set center of mass
 		rigidbody.centerOfMass = shoulderPos;
 	}
@@ -70,12 +75,17 @@ public class PigBehaviour : MonoBehaviour {
 		if (mouseTarget != Vector3.zero) {
 			crosshair.position = mouseTarget;
 			Vector3 aimDir = (mouseTarget - (transform.position + shoulderPos)).normalized;
-			aimAngle = Mathf.Rad2Deg * Mathf.Atan2(aimDir.y, aimDir.x);
+			
+			if (facingRight) {
+				aimAngle = Mathf.Rad2Deg * Mathf.Atan2(aimDir.y, aimDir.x);
+			} else {
+				aimAngle = Mathf.Rad2Deg * Mathf.Atan2(aimDir.y, -aimDir.x);
+			}
 		} else {
 			crosshair.position = transform.position + shoulderPos + new Vector3(5f, 0f, 0f);
 		}
 		
-		if (ridingRocket) {
+		if (ridingRocket || isDead || stunTimer > 0f) {
 			launcher.renderer.enabled = false;
 		} else {
 			launcher.renderer.enabled = true;
@@ -85,6 +95,7 @@ public class PigBehaviour : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		rigidbody.WakeUp();
 		
 		if (!isDead && stunTimer <= 0f) {
 			Vector3 aimDir;
@@ -101,9 +112,19 @@ public class PigBehaviour : MonoBehaviour {
 					if (Input.GetAxis("Horizontal") < 0f) {
 						rigidbody.velocity = new Vector3(-runSpeed, rigidbody.velocity.y, 0f);
 						animation.Play("RunAnimation", PlayMode.StopAll);
+						
+						if (facingRight) {
+							Rotate(false);
+						}
+						
 					} else if (Input.GetAxis("Horizontal") > 0f) {
 						rigidbody.velocity = new Vector3(runSpeed, rigidbody.velocity.y, 0f);
 						animation.Play("RunAnimation", PlayMode.StopAll);
+						
+						if (!facingRight) {
+							Rotate(true);
+						}
+						
 					} else {
 						animation.Play("StandAnimation", PlayMode.StopAll);
 					}
@@ -112,9 +133,19 @@ public class PigBehaviour : MonoBehaviour {
 					if (Input.GetAxis("Horizontal") < 0f) {
 						rigidbody.AddForce(new Vector3(-airSpeed, 0f, 0f), ForceMode.Acceleration);
 						animation.Play("StandAnimation", PlayMode.StopAll);
+						
+						if (facingRight) {
+							Rotate(false);
+						}
+						
 					} else if (Input.GetAxis("Horizontal") > 0f) {
 						rigidbody.AddForce(new Vector3(airSpeed * 2f, 0f, 0f), ForceMode.Acceleration);
 						animation.Play("StandAnimation", PlayMode.StopAll);
+						
+						if (!facingRight) {
+							Rotate(true);
+						}
+						
 					} else {
 						animation.Play("StandAnimation", PlayMode.StopAll);	
 					}
@@ -165,14 +196,16 @@ public class PigBehaviour : MonoBehaviour {
 			ridingRocket = true;
 			transform.parent = rocket.transform;
 			rigidbody.isKinematic = true;
-			transform.localPosition = new Vector3(0f, 0.4f, -2f);
-			transform.localRotation = Quaternion.Euler(new Vector3(90f, 0f, 0f));
 			
 			animation.Play("StandAnimation", PlayMode.StopAll);
+			
+			MountRocket(transform.localPosition, transform.localRotation);
 		}
 	}
 	
 	public void AbandonRocket() {
+		StopAllCoroutines();
+		
 		ridingRocket = false;
 		transform.parent = null;
 		rigidbody.isKinematic = false;
@@ -238,5 +271,48 @@ public class PigBehaviour : MonoBehaviour {
 		} else {
 			return Vector3.zero;
 		}
+	}
+	
+	private void Rotate(bool faceRight) {
+		StopAllCoroutines();
+		StartCoroutine(RotateCoroutine(faceRight));
+	}
+	
+	private IEnumerator RotateCoroutine(bool faceRight) {
+		facingRight = faceRight;
+		
+		for (float t = 0; t <= rotateTime; t += Time.deltaTime) {
+			if (faceRight) {			
+				transform.rotation = Quaternion.Slerp(Quaternion.Euler(new Vector3(0f, 270f, 0f)), Quaternion.Euler(new Vector3(0f, 90f, 0f)), t / rotateTime);
+			} else {
+				transform.rotation = Quaternion.Slerp(Quaternion.Euler(new Vector3(0f, 90f, 0f)), Quaternion.Euler(new Vector3(0f, 270f, 0f)), t / rotateTime);
+			}
+			
+			yield return null;
+		}
+		
+		if (faceRight) {			
+			transform.rotation = Quaternion.Euler(new Vector3(0f, 90f, 0f));
+		} else {
+			transform.rotation = Quaternion.Euler(new Vector3(0f, 270f, 0f));
+		}
+	}
+	
+	private void MountRocket(Vector3 originalPosition, Quaternion originalRotation) {
+		StopAllCoroutines();
+		StartCoroutine(MountRocketCoroutine(originalPosition, originalRotation));
+	}
+	
+	private IEnumerator MountRocketCoroutine(Vector3 originalPosition, Quaternion originalRotation) {
+		for (float t = 0; t <= rotateTime; t += Time.deltaTime) {
+			
+			transform.localPosition = Vector3.Lerp(originalPosition, new Vector3(0f, 0.4f, -2f), t / rotateTime); 
+			transform.localRotation = Quaternion.Slerp(originalRotation, Quaternion.Euler(new Vector3(90f, 0f, 0f)), t / rotateTime);
+			
+			yield return null;
+		}
+		
+		transform.localPosition = new Vector3(0f, 0.4f, -2f); 
+		transform.localRotation = Quaternion.Euler(new Vector3(90f, 0f, 0f));
 	}
 }
