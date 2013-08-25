@@ -22,7 +22,7 @@ public class SyringeTrigger : MonoBehaviour {
 			Debug.Log("more time!");
 			audio.PlayOneShot(powerupSound);
 			boredomClock.increaseClock(10);
-			Destroy(gameObject);
+			Destroy(gameObject,0.2f);
 		}
     }
 	
