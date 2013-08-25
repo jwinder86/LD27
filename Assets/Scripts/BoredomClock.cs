@@ -34,6 +34,9 @@ public class BoredomClock : MonoBehaviour {
 				boredom = boredomMax;
 			}
 		}
+		if(Input.GetKeyDown ("r")){
+			Application.LoadLevel(Application.loadedLevel);
+		}
 		display.setStatus(boredom / boredomMax, boredom);
 	}
 	
