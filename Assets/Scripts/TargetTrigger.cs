@@ -8,6 +8,10 @@ public class TargetTrigger : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
+		
+		
+		boredomClock = (BoredomClock) FindObjectOfType(typeof(BoredomClock));
+		
 	}
 	
 	// Update is called once per frame
