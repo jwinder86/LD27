@@ -21,7 +21,7 @@ public class TargetTrigger : MonoBehaviour {
 	public void Explode(){
 		Debug.Log ("exploding");
 		audio.PlayOneShot(destructionSound);
-		boredomClock.increaseClock(2);
+		boredomClock.increaseClock(10);
 		rigidbody.useGravity = true;
 		rigidbody.constraints = RigidbodyConstraints.None;
 		rigidbody.AddTorque(Random.rotationUniform.eulerAngles, ForceMode.VelocityChange);

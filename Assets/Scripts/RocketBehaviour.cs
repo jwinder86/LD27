@@ -21,13 +21,13 @@ public class RocketBehaviour : MonoBehaviour {
 	private bool controlRocket = false;
 	private bool exploded;
 	
-	private BoredomClock boredomClock;
+	//private BoredomClock boredomClock;
 	
 	// Use this for initialization
 	void Start () {
 		exploded = false;
 		
-		boredomClock = (BoredomClock) FindObjectOfType(typeof(BoredomClock));
+		//boredomClock = (BoredomClock) FindObjectOfType(typeof(BoredomClock));
 		
 		audio.PlayOneShot(thrustSound);
 		
@@ -67,7 +67,7 @@ public class RocketBehaviour : MonoBehaviour {
 			ExplosionBehaviour explosion = (ExplosionBehaviour) Instantiate(explosionPrefab, transform.position, Quaternion.identity);
 			explosion.Explode();
 			// incease clock
-			boredomClock.increaseClock(1);
+			//boredomClock.increaseClock(1);
 			// remove pigs from rockets
 			PigBehaviour[] pigs = GetComponentsInChildren<PigBehaviour>();
 			foreach(PigBehaviour pig in pigs) {
