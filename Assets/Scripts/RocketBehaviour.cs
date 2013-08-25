@@ -10,6 +10,7 @@ public class RocketBehaviour : MonoBehaviour {
 	public float turnAngleThreshold;
 	public float turnSpeedDegrees;
 	public float acceleration;
+	public float maxSpeed = 50;
 	
 	public ParticleSystem particleSystem;
 	public Transform model;
@@ -39,6 +40,16 @@ public class RocketBehaviour : MonoBehaviour {
 		// thrust forward
 		Vector3 direction = transform.forward;
 		rigidbody.AddForce(direction * acceleration, ForceMode.Acceleration);
+		
+		// speed limiter
+		float speed = rigidbody.velocity.magnitude;
+		Debug.Log(speed);
+		if (speed > maxSpeed){
+			rigidbody.velocity = rigidbody.velocity.normalized * maxSpeed;
+		}
+		
+		
+		
 		
 		// rotate
 		//Debug.Log(controlRocket);
