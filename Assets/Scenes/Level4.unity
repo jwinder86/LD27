@@ -3423,6 +3423,10 @@ Prefab:
       propertyPath: Priority
       value: 128
       objectReference: {fileID: 0}
+    - target: {fileID: 8200000, guid: 3d0de1f07a66bc44684188aeada676b8, type: 2}
+      propertyPath: rolloffMode
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3d0de1f07a66bc44684188aeada676b8, type: 2}
   m_RootGameObject: {fileID: 1358012399}
@@ -4137,7 +4141,7 @@ AudioSource:
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0

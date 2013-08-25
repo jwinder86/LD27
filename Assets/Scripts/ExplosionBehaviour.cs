@@ -53,7 +53,9 @@ public class ExplosionBehaviour : MonoBehaviour {
 		}
 		
 		if (other.rigidbody != null) {
-			Vector3 direction = (other.transform.position - transform.position).normalized;
+			Vector3 direction = (other.transform.position - transform.position);
+			direction.z = 0f;
+			direction = direction.normalized;
 			
 			other.rigidbody.AddForce(direction * explosionForce, ForceMode.VelocityChange);
 		}

@@ -5,6 +5,9 @@ using System.Collections;
 [RequireComponent (typeof(Collider))]
 public class PigBehaviour : MonoBehaviour {
 	
+	private static Plane plane = new Plane(new Vector3(0f, 0f, 1f), Vector3.zero);
+	private static Vector3 shoulderPos = new Vector3(0f, 1.5f, 0f);
+	
 	public float runSpeed;
 	public float airSpeed;
 	public float jumpSpeed;
@@ -44,8 +47,13 @@ public class PigBehaviour : MonoBehaviour {
 	void Update () {
 		
 		if (!isDead && stunTimer <= 0f) {
-			Vector3 aimDir = (Input.mousePosition - screenCenter).normalized;
-			Debug.DrawLine(transform.position, transform.position + aimDir * 4);
+			Vector3 aimDir;
+			Vector3 mouseTarget = GetMouseTarget();
+			if (mouseTarget != Vector3.zero) {
+				aimDir = (mouseTarget - (transform.position + shoulderPos)).normalized;
+			} else {
+				aimDir = new Vector3(1f, 0f, 0f);
+			}
 			
 			if (!ridingRocket) {
 				// move left and right
@@ -80,15 +88,14 @@ public class PigBehaviour : MonoBehaviour {
 				
 				// fire rocket
 				if (Input.GetButtonDown("Fire1") || Input.GetButtonDown("Fire2")) {
-					float angle = Mathf.Rad2Deg * Mathf.Atan2(-aimDir.y, aimDir.x);
-					FireRocket(angle, Input.GetButtonDown("Fire2"));
+					FireRocket(aimDir, Input.GetButtonDown("Fire2"));
 				}
 				
 			} else {
 				// jump
 				if (Input.GetButtonDown("Jump")) {
 					AbandonRocket();
-					rigidbody.velocity = new Vector3(rigidbody.velocity.x, rigidbody.velocity.y + jumpSpeed, 0f);
+					rigidbody.velocity = new Vector3(rigidbody.velocity.x, rigidbody.velocity.y, 0f);
 				}
 			}
 		} else if (stunTimer > 0f) {
@@ -100,8 +107,9 @@ public class PigBehaviour : MonoBehaviour {
 		}
 	}
 	
-	private void FireRocket(float angle, bool ride) {
-		rocket = (RocketBehaviour) Instantiate(rocketPrefab, transform.position, Quaternion.Euler(new Vector3(angle, 90f, 0f)));
+	private void FireRocket(Vector3 aimDir, bool ride) {
+		float angle = Mathf.Rad2Deg * Mathf.Atan2(-aimDir.y, aimDir.x);
+		rocket = (RocketBehaviour) Instantiate(rocketPrefab, transform.position + shoulderPos + aimDir * 3, Quaternion.Euler(new Vector3(angle, 90f, 0f)));
 		rocket.rigidbody.velocity = rigidbody.velocity;
 		
 		// ride rocket
@@ -165,6 +173,17 @@ public class PigBehaviour : MonoBehaviour {
 			}
 			
 			transform.rigidbody.constraints = RigidbodyConstraints.FreezePositionZ;
+		}
+	}
+	
+	public Vector3 GetMouseTarget() {
+		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		
+		float dist = 0f;
+		if (plane.Raycast(ray, out dist)) {
+			return ray.GetPoint(dist);
+		} else {
+			return Vector3.zero;
 		}
 	}
 }
