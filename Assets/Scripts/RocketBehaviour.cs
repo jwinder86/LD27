@@ -43,7 +43,7 @@ public class RocketBehaviour : MonoBehaviour {
 		
 		// speed limiter
 		float speed = rigidbody.velocity.magnitude;
-		if (speed > maxSpeed){
+		if (speed > maxSpeed && !rigidbody.isKinematic){
 			rigidbody.velocity = rigidbody.velocity.normalized * maxSpeed;
 		}
 		
