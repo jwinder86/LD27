@@ -3,6 +3,7 @@ using System.Collections;
 
 [RequireComponent (typeof(Rigidbody))]
 [RequireComponent (typeof(Collider))]
+[RequireComponent (typeof(AudioSource))]
 public class PigBehaviour : MonoBehaviour {
 	
 	private static Plane plane = new Plane(new Vector3(0f, 0f, 1f), Vector3.zero);
@@ -30,6 +31,8 @@ public class PigBehaviour : MonoBehaviour {
 	private Vector3 screenCenter;
 	
 	private Animation animation;
+	
+	public AudioClip deathSound;
 	
 	// Use this for initialization
 	void Start () {
@@ -176,7 +179,7 @@ public class PigBehaviour : MonoBehaviour {
 	public void Die() {
 		if (!isDead) {
 			isDead = true;
-			
+			audio.PlayOneShot(deathSound);
 			if (ridingRocket) {
 				transform.localRotation = Quaternion.Euler(new Vector3(0f, -180f, 0f));
 				AbandonRocket();
@@ -187,6 +190,7 @@ public class PigBehaviour : MonoBehaviour {
 			animation.Play("StunAnimation", PlayMode.StopAll);
 			transform.rigidbody.constraints = RigidbodyConstraints.FreezePositionZ;
 			rigidbody.AddTorque(Random.rotation.eulerAngles, ForceMode.VelocityChange);
+			
 		}
 	}
 	
