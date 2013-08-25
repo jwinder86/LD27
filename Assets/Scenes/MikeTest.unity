@@ -995,6 +995,10 @@ Prefab:
       propertyPath: rocketRechargePerSecond
       value: .75
       objectReference: {fileID: 0}
+    - target: {fileID: 8200000, guid: 8da2c0b06d3d77f438c415d9399d78a9, type: 2}
+      propertyPath: rolloffMode
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8da2c0b06d3d77f438c415d9399d78a9, type: 2}
   m_RootGameObject: {fileID: 811256340}
@@ -2270,7 +2274,7 @@ AudioSource:
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0

@@ -21,7 +21,7 @@ public class SyringeTrigger : MonoBehaviour {
 		if(null != other.GetComponent("PigBehaviour")){
 			Debug.Log("more time!");
 			audio.PlayOneShot(powerupSound);
-			boredomClock.increaseClock(10);
+			boredomClock.WinGame();
 			Destroy(gameObject,0.2f);
 		}
     }

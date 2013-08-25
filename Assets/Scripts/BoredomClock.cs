@@ -21,19 +21,19 @@ public class BoredomClock : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	 	
-		if(boredom > 0f){
-			boredom = boredom - Time.deltaTime;
-		} else {
-			boredom = 0f;
-			GameOver();
+	 	if (gameRunning) {
+			if(boredom > 0f){
+				boredom = boredom - Time.deltaTime;
+			} else {
+				boredom = 0f;
+				GameOver();
+			}
+			
+			// don't allow the boredom clock to be higher than boredomMax
+			if(boredom > boredomMax){
+				boredom = boredomMax;
+			}
 		}
-		
-		// don't allow the boredom clock to be higher than boredomMax
-		if(boredom > boredomMax){
-			boredom = boredomMax;
-		}
-		
 		display.setStatus(boredom / boredomMax, boredom);
 	}
 	
@@ -55,6 +55,12 @@ public class BoredomClock : MonoBehaviour {
 			StartCoroutine(ReloadLevel());
 		}
 	}
+	
+	public void WinGame() {
+			gameRunning = false;		
+			StartCoroutine(ReloadLevel());
+	}
+	
 	
 	private IEnumerator ReloadLevel() {
 		yield return new WaitForSeconds(5f);
