@@ -5,6 +5,8 @@ using System.Collections;
 public class SyringeTrigger : MonoBehaviour {
 	
 	public AudioClip powerupSound;
+	public EffectBehaviour effect;
+	
 	private BoredomClock boredomClock;
 	// Use this for initialization
 	void Start () {
@@ -18,10 +20,11 @@ public class SyringeTrigger : MonoBehaviour {
 	
 	 void OnTriggerEnter(Collider other) {
 		if(null != other.GetComponent("PigBehaviour")){
-			Debug.Log("more time!");
+			collider.enabled = false;
+			effect.RunEffect();
 			audio.PlayOneShot(powerupSound);
 			boredomClock.WinGame();
-			Destroy(gameObject,0.2f);
+			Destroy(gameObject, 5f);
 		}
     }
 	
