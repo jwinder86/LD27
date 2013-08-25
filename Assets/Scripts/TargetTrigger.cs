@@ -5,12 +5,13 @@ using System.Collections;
 [RequireComponent (typeof(AudioSource))]
 public class TargetTrigger : MonoBehaviour {
 	
-	public BoredomClock boredomClock;
 	public AudioClip destructionSound;
+	
+	private BoredomClock boredomClock;
+	
 	// Use this for initialization
 	void Start () {
 		boredomClock = (BoredomClock) FindObjectOfType(typeof(BoredomClock));
-		
 	}
 	
 	// Update is called once per frame

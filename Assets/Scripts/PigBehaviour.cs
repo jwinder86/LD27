@@ -59,6 +59,9 @@ public class PigBehaviour : MonoBehaviour {
 		
 		boredomClock = (BoredomClock) FindObjectOfType(typeof(BoredomClock));
 		timerBar = (TimerBarBehaviour) FindObjectOfType(typeof(TimerBarBehaviour));
+		
+		// XXX: set center of mass
+		rigidbody.centerOfMass = shoulderPos;
 	}
 	
 	void LateUpdate() {
