@@ -17,6 +17,8 @@ public class PigBehaviour : MonoBehaviour {
 	
 	public FeetCollider feetCollider;
 	
+	public Transform crosshair;
+	
 	private bool ridingRocket;
 	private bool onGround;
 	private bool isDead;
@@ -41,6 +43,15 @@ public class PigBehaviour : MonoBehaviour {
 		animation = GetComponentInChildren<Animation>();
 		
 		rocket = null;
+	}
+	
+	void LateUpdate() {
+		Vector3 mouseTarget = GetMouseTarget();
+			if (mouseTarget != Vector3.zero) {
+				crosshair.position = mouseTarget;
+			} else {
+				crosshair.position = transform.position + shoulderPos + new Vector3(5f, 0f, 0f);
+			}
 	}
 	
 	// Update is called once per frame
@@ -148,8 +159,9 @@ public class PigBehaviour : MonoBehaviour {
 			transform.localRotation = Quaternion.Euler(new Vector3(0f, -180f, 0f));
 		}
 		
-		rigidbody.AddTorque(Random.rotation.eulerAngles, ForceMode.VelocityChange);
+		animation.Play("StunAnimation", PlayMode.StopAll);
 		rigidbody.constraints = RigidbodyConstraints.FreezePositionZ;
+		rigidbody.AddTorque(Random.rotation.eulerAngles, ForceMode.VelocityChange);
 	}
 	
 	private void Recover() {
@@ -172,7 +184,9 @@ public class PigBehaviour : MonoBehaviour {
 				transform.localRotation = Quaternion.Euler(new Vector3(0f, -180f, 0f));
 			}
 			
+			animation.Play("StunAnimation", PlayMode.StopAll);
 			transform.rigidbody.constraints = RigidbodyConstraints.FreezePositionZ;
+			rigidbody.AddTorque(Random.rotation.eulerAngles, ForceMode.VelocityChange);
 		}
 	}
 	
