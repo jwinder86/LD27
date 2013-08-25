@@ -41,14 +41,11 @@ public class ExplosionBehaviour : MonoBehaviour {
 		PigBehaviour pig = other.GetComponent<PigBehaviour>();
 		TargetTrigger target = other.GetComponent<TargetTrigger>();
 		
-		Debug.Log(pig + "," + target);
-		
 		if (pig != null) {
 			pig.Stun();
 		}
 		
 		if (target != null){
-			Debug.Log ("Target!");
 			target.Explode();
 		}
 		

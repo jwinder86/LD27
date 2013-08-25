@@ -256,7 +256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af6cd89994c88bb4092b3c0ad648109a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boredomMax: 11
+  boredomMax: 10
   display: {fileID: 11400000}
 --- !u!1001 &100100000
 Prefab:

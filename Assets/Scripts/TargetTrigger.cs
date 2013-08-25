@@ -22,7 +22,9 @@ public class TargetTrigger : MonoBehaviour {
 		Debug.Log ("exploding");
 		audio.PlayOneShot(destructionSound);
 		boredomClock.increaseClock(2);
-		Destroy(gameObject, 0.2f);
+		Destroy(collider);
+		Destroy(rigidbody);
+		Destroy(gameObject, 2f);
 	}
 	
 }
