@@ -40,13 +40,18 @@ public class ExplosionBehaviour : MonoBehaviour {
 	public void OnTriggerEnter(Collider other) {
 		PigBehaviour pig = other.GetComponent<PigBehaviour>();
 		TargetTrigger target = other.GetComponent<TargetTrigger>();
+		
+		Debug.Log(pig + "," + target);
+		
 		if (pig != null) {
 			pig.Stun();
 		}
-		Debug.Log(target);
+		
 		if (target != null){
-			target.explode ();
+			Debug.Log ("Target!");
+			target.Explode();
 		}
+		
 		if (other.rigidbody != null) {
 			Vector3 direction = (other.transform.position - transform.position).normalized;
 			

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent (typeof(Collider))]
 public class TargetTrigger : MonoBehaviour {
 	
 	public BoredomClock boredomClock;
@@ -14,12 +15,7 @@ public class TargetTrigger : MonoBehaviour {
 	
 	}
 	
-//	 void OnCollisionEnter(Collision collision) {
-//		//boredomClock.increaseClock(10);
-//		Destroy(gameObject);
-//    }
-//	
-	public void explode(){
+	public void Explode(){
 		Debug.Log ("exploding");
 		boredomClock.increaseClock(2);
 		Destroy(gameObject);
