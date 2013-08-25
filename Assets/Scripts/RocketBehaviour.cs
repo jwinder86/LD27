@@ -43,7 +43,6 @@ public class RocketBehaviour : MonoBehaviour {
 		
 		// speed limiter
 		float speed = rigidbody.velocity.magnitude;
-		Debug.Log(speed);
 		if (speed > maxSpeed){
 			rigidbody.velocity = rigidbody.velocity.normalized * maxSpeed;
 		}

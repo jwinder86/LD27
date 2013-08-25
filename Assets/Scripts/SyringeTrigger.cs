@@ -5,11 +5,10 @@ using System.Collections;
 public class SyringeTrigger : MonoBehaviour {
 	
 	public AudioClip powerupSound;
-	public BoredomClock boredomClock;
+	private BoredomClock boredomClock;
 	// Use this for initialization
 	void Start () {
-		
-		BoredomClock boredomClock = (BoredomClock) FindObjectOfType(typeof(BoredomClock));
+		boredomClock = (BoredomClock) FindObjectOfType(typeof(BoredomClock));
 	}
 	
 	// Update is called once per frame
