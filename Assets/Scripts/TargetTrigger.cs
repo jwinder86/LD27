@@ -14,10 +14,15 @@ public class TargetTrigger : MonoBehaviour {
 	
 	}
 	
-	 void OnCollisionEnter(Collision collision) {
-		//boredomClock.increaseClock(10);
+//	 void OnCollisionEnter(Collision collision) {
+//		//boredomClock.increaseClock(10);
+//		Destroy(gameObject);
+//    }
+//	
+	public void explode(){
+		Debug.Log ("exploding");
+		boredomClock.increaseClock(2);
 		Destroy(gameObject);
-    }
-	
+	}
 	
 }
