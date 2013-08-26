@@ -18,8 +18,12 @@ public class DeathPitBehavior : MonoBehaviour {
 	void OnTriggerEnter(Collider other) {
 		PigBehaviour pig = other.GetComponent<PigBehaviour>();
 		if(null != pig){
+			//if(!pig.rigidbody.isKinematic){
+			
+			pig.AbandonRocket();
 			pig.rigidbody.velocity = pig.rigidbody.velocity / 5f;
-			pig.rigidbody.drag = 0.999f;
+				pig.rigidbody.drag = 0.999f;
+		//	}
 			pig.Die();
 		}
     }

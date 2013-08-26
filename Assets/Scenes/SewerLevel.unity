@@ -227,6 +227,34 @@ Transform:
   m_Children:
   - {fileID: 51625665}
   m_Father: {fileID: 579044041}
+--- !u!1 &28810961
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100016, guid: 3d0de1f07a66bc44684188aeada676b8, type: 2}
+  m_PrefabInternal: {fileID: 810186295}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 28810962}
+  - 33: {fileID: 51977198}
+  - 23: {fileID: 51977197}
+  m_Layer: 0
+  m_Name: liquid
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &28810962
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 400016, guid: 3d0de1f07a66bc44684188aeada676b8, type: 2}
+  m_PrefabInternal: {fileID: 810186295}
+  m_GameObject: {fileID: 28810961}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 51977199}
 --- !u!1 &47181884
 GameObject:
   m_ObjectHideFlags: 0
@@ -359,11 +387,9 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 51977199}
-  - 33: {fileID: 51977198}
-  - 23: {fileID: 51977197}
   - 111: {fileID: 51977200}
   m_Layer: 0
-  m_Name: Cylinder
+  m_Name: syringe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -375,7 +401,7 @@ Renderer:
   m_PrefabParentObject: {fileID: 2300006, guid: 3d0de1f07a66bc44684188aeada676b8,
     type: 2}
   m_PrefabInternal: {fileID: 810186295}
-  m_GameObject: {fileID: 51977196}
+  m_GameObject: {fileID: 28810961}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -394,18 +420,20 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 3300006, guid: 3d0de1f07a66bc44684188aeada676b8,
     type: 2}
   m_PrefabInternal: {fileID: 810186295}
-  m_GameObject: {fileID: 51977196}
-  m_Mesh: {fileID: 4300000, guid: d79dba307485a534d912cc4cb0fa9600, type: 3}
+  m_GameObject: {fileID: 28810961}
+  m_Mesh: {fileID: 4300002, guid: d79dba307485a534d912cc4cb0fa9600, type: 3}
 --- !u!4 &51977199
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 400006, guid: 3d0de1f07a66bc44684188aeada676b8, type: 2}
   m_PrefabInternal: {fileID: 810186295}
   m_GameObject: {fileID: 51977196}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
-  m_Children: []
+  m_Children:
+  - {fileID: 1005681579}
+  - {fileID: 28810962}
   m_Father: {fileID: 550449583}
 --- !u!111 &51977200
 Animation:
@@ -2061,9 +2089,9 @@ Transform:
   m_LocalPosition: {x: 260, y: 22, z: 0}
   m_LocalScale: {x: .75, y: .75, z: .75}
   m_Children:
-  - {fileID: 51977199}
   - {fileID: 1151122205}
   - {fileID: 646987791}
+  - {fileID: 51977199}
   m_Father: {fileID: 579044041}
 --- !u!82 &550449584
 AudioSource:
@@ -2136,7 +2164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf276c58d25f34e40a311c1ce2b8d36a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerupSound: {fileID: 8300000, guid: 5eb4281a1f153724e9e21a2974646ea4, type: 3}
+  powerupSound: {fileID: 8300000, guid: 5fcc8d7e70374c74d9171e9a8c84a8ee, type: 3}
   effect: {fileID: 646987792}
 --- !u!135 &550449586
 SphereCollider:
@@ -3467,7 +3495,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2340cd9810e93d04cb1362b5a6e69601, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destructionSound: {fileID: 8300000, guid: d52b7886c1cde9b4b82c4f8503e518c9, type: 3}
   explosionPrefab: {fileID: 11400000, guid: 65d5a2ad39ae2364d8851499d7eadbe6, type: 2}
   gibPrefab: {fileID: 11400000, guid: db89a7e8bbb88cc4ba413abb8d67b414, type: 2}
   gibCount: 3
@@ -3632,7 +3659,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2340cd9810e93d04cb1362b5a6e69601, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destructionSound: {fileID: 8300000, guid: d52b7886c1cde9b4b82c4f8503e518c9, type: 3}
   explosionPrefab: {fileID: 11400000, guid: 65d5a2ad39ae2364d8851499d7eadbe6, type: 2}
   gibPrefab: {fileID: 11400000, guid: db89a7e8bbb88cc4ba413abb8d67b414, type: 2}
   gibCount: 3
@@ -4035,7 +4061,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2340cd9810e93d04cb1362b5a6e69601, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destructionSound: {fileID: 8300000, guid: d52b7886c1cde9b4b82c4f8503e518c9, type: 3}
   explosionPrefab: {fileID: 11400000, guid: 65d5a2ad39ae2364d8851499d7eadbe6, type: 2}
   gibPrefab: {fileID: 11400000, guid: db89a7e8bbb88cc4ba413abb8d67b414, type: 2}
   gibCount: 3
@@ -4427,6 +4452,61 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1849257595}
+--- !u!1 &1005681578
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100014, guid: 3d0de1f07a66bc44684188aeada676b8, type: 2}
+  m_PrefabInternal: {fileID: 810186295}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1005681579}
+  - 33: {fileID: 1005681581}
+  - 23: {fileID: 1005681580}
+  m_Layer: 0
+  m_Name: syringe
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1005681579
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 400014, guid: 3d0de1f07a66bc44684188aeada676b8, type: 2}
+  m_PrefabInternal: {fileID: 810186295}
+  m_GameObject: {fileID: 1005681578}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 51977199}
+--- !u!23 &1005681580
+Renderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 2300008, guid: 3d0de1f07a66bc44684188aeada676b8,
+    type: 2}
+  m_PrefabInternal: {fileID: 810186295}
+  m_GameObject: {fileID: 1005681578}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: 2f7b16998295bc8498f77d503632b47e, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+--- !u!33 &1005681581
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 3300008, guid: 3d0de1f07a66bc44684188aeada676b8,
+    type: 2}
+  m_PrefabInternal: {fileID: 810186295}
+  m_GameObject: {fileID: 1005681578}
+  m_Mesh: {fileID: 4300000, guid: d79dba307485a534d912cc4cb0fa9600, type: 3}
 --- !u!1 &1012914382
 GameObject:
   m_ObjectHideFlags: 0
@@ -6119,7 +6199,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2340cd9810e93d04cb1362b5a6e69601, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destructionSound: {fileID: 8300000, guid: d52b7886c1cde9b4b82c4f8503e518c9, type: 3}
   explosionPrefab: {fileID: 11400000, guid: 65d5a2ad39ae2364d8851499d7eadbe6, type: 2}
   gibPrefab: {fileID: 11400000, guid: db89a7e8bbb88cc4ba413abb8d67b414, type: 2}
   gibCount: 3
@@ -6350,7 +6429,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2340cd9810e93d04cb1362b5a6e69601, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destructionSound: {fileID: 8300000, guid: d52b7886c1cde9b4b82c4f8503e518c9, type: 3}
   explosionPrefab: {fileID: 11400000, guid: 65d5a2ad39ae2364d8851499d7eadbe6, type: 2}
   gibPrefab: {fileID: 11400000, guid: db89a7e8bbb88cc4ba413abb8d67b414, type: 2}
   gibCount: 3
@@ -7095,7 +7173,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2340cd9810e93d04cb1362b5a6e69601, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destructionSound: {fileID: 8300000, guid: d52b7886c1cde9b4b82c4f8503e518c9, type: 3}
   explosionPrefab: {fileID: 11400000, guid: 65d5a2ad39ae2364d8851499d7eadbe6, type: 2}
   gibPrefab: {fileID: 11400000, guid: db89a7e8bbb88cc4ba413abb8d67b414, type: 2}
   gibCount: 3
@@ -8108,7 +8185,7 @@ AudioSource:
   m_Pitch: 1
   Loop: 0
   Mute: 0
-  Priority: 128
+  Priority: 255
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -8187,6 +8264,7 @@ MonoBehaviour:
   launcher: {fileID: 1520018505}
   crosshair: {fileID: 1102562300}
   deathSound: {fileID: 8300000, guid: ebc97fcc7a48ef54ba074fd057da7ecc, type: 3}
+  hitSound: {fileID: 8300000, guid: 5fe861212c7089c4f86ecfbe39010c54, type: 3}
   rocketMax: 5
   rocketRechargePerSecond: 1
 --- !u!54 &1675282682
@@ -9865,7 +9943,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boredomMax: 10
   display: {fileID: 1849257597}
-  nextLevel: TutorialScene
+  levelList:
+  - TutorialScene
+  - Level4
+  - Level5
+  - SewerLevel
+  moreTime: {fileID: 8300000, guid: 5eb4281a1f153724e9e21a2974646ea4, type: 3}
+  tickSound: {fileID: 8300000, guid: 52659c79baf18024f94f6c1abb47266d, type: 3}
 --- !u!114 &1849257597
 MonoBehaviour:
   m_ObjectHideFlags: 0
