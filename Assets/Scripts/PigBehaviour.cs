@@ -262,7 +262,7 @@ public class PigBehaviour : MonoBehaviour {
 	}
 	
 	public void Die() {
-		if (!isDead) {
+		if (!isDead && boredomClock.isGameRunning()) {
 			isDead = true;
 			audio.PlayOneShot(deathSound);
 			if (ridingRocket) {

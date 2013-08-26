@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionSound: {fileID: 8300000, guid: 66b6543a200d89643a63ed67579f23d5, type: 3}
-  explosionForce: 50
+  explosionForce: 35
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1
