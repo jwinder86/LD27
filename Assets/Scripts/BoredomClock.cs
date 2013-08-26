@@ -26,6 +26,11 @@ public class BoredomClock : MonoBehaviour {
 	 	if (gameRunning) {
 			if(boredom > 0f){
 				boredom = boredom - Time.deltaTime;
+				
+				if (boredom < 3f) {
+					display.setShakeTime(boredom);
+				}
+				
 			} else {
 				boredom = 0f;
 				GameOver();
@@ -35,7 +40,12 @@ public class BoredomClock : MonoBehaviour {
 			if(boredom > boredomMax){
 				boredom = boredomMax;
 			}
+		} else {
+			if (boredom <= 0f) {
+				display.setShakeTime(1f);
+			}
 		}
+		
 		if(Input.GetKeyDown ("r")){
 			Application.LoadLevel(Application.loadedLevel);
 		}
@@ -46,6 +56,7 @@ public class BoredomClock : MonoBehaviour {
 	public void increaseClock(float amount){
 		if (gameRunning) {
 			boredom += amount;
+			display.setShakeTime(0.5f);
 			Debug.Log ("increasing time: " + amount + " = " + boredom);
 		}
 	}

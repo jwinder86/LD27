@@ -60,7 +60,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400006}
   m_Layer: 0
-  m_Name: arrow
+  m_Name: SewerArrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -121,8 +121,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
-  m_LocalRotation: {x: -.707106829, y: .707106829, z: 3.09086232e-08, w: -3.09086232e-08}
-  m_LocalPosition: {x: 109.999985, y: 15, z: 5}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: -4.37113883e-08}
+  m_LocalPosition: {x: 25, y: 40, z: 5}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 400004}
@@ -189,7 +189,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: f46dfa4bb42e5ee489e567e59332ea25, type: 2}
+  - {fileID: 2100000, guid: dfc8664d42000d144b6418d0c6f57f06, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -225,9 +225,9 @@ Light:
   m_Enabled: 1
   serializedVersion: 3
   m_Type: 2
-  m_Color: {r: .301470578, g: .768762529, b: 1, a: 1}
-  m_Intensity: .5
-  m_Range: 10
+  m_Color: {r: .247659162, g: .0291414298, b: .566176474, a: 1}
+  m_Intensity: .200000003
+  m_Range: 30
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:

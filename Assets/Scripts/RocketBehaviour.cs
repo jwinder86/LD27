@@ -75,8 +75,10 @@ public class RocketBehaviour : MonoBehaviour {
 			
 			ExplosionBehaviour explosion = (ExplosionBehaviour) Instantiate(explosionPrefab, transform.position, Quaternion.identity);
 			explosion.Explode();
+			
 			// incease clock
-			boredomClock.increaseClock(.15f);
+			// boredomClock.increaseClock(.15f);
+			
 			// remove pigs from rockets
 			PigBehaviour[] pigs = GetComponentsInChildren<PigBehaviour>();
 			foreach(PigBehaviour pig in pigs) {

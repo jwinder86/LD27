@@ -9,6 +9,10 @@ public class TargetTrigger : MonoBehaviour {
 	
 	public ExplosionBehaviour explosionPrefab;
 	
+	public GibBehaviour gibPrefab;
+	public int gibCount = 3;
+	public float gibSpeed = 3f;
+	
 	private BoredomClock boredomClock;
 	private bool exploded;
 	
@@ -39,11 +43,18 @@ public class TargetTrigger : MonoBehaviour {
 		}
 	}
 	
-	private IEnumerator ExplodeLater() {
+	protected virtual IEnumerator ExplodeLater() {
 		yield return new WaitForSeconds(2f);
 		
 		ExplosionBehaviour explosion = (ExplosionBehaviour) Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+		explosion.transform.localScale = transform.localScale;
 		explosion.Explode();
+		
+		for (int i = 0; i < gibCount; i++) {
+			Vector3 dir = Random.onUnitSphere;
+			GibBehaviour gib = (GibBehaviour) Instantiate(gibPrefab, transform.position + new Vector3(0f, 1.5f, 0f) + dir, Quaternion.identity);
+			gib.rigidbody.velocity = dir * gibSpeed;
+		}
 		
 		Destroy(gameObject);
 	}

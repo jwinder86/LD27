@@ -10,18 +10,31 @@ public class TimerBarBehaviour : MonoBehaviour {
 	public Color fullColor;
 	public Color emptyColor;
 	
+	public float shakeSpeed = 4f;
+	public float shakeMagnitude = 0.05f;
+	
+	private Vector3 parentInitialScale;
 	private Vector3 initialScale;
 	private Vector3 initialPosition;
+	private float shakeTime;
 	
 	// Use this for initialization
 	void Start () {
+		parentInitialScale = transform.localScale;
 		initialScale = bar.localScale;
 		initialPosition = bar.localPosition;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+		if (shakeTime > 0f) {
+			shakeTime -= Time.deltaTime;
+			
+			float scaleMult = Mathf.Sin(Time.timeSinceLevelLoad * Mathf.PI * shakeSpeed) * shakeMagnitude + 1f;
+			transform.localScale = parentInitialScale * scaleMult;
+		
+			Debug.Log(scaleMult);
+		}
 	}
 	
 	public void setStatus(float fraction, float value) {
@@ -39,5 +52,9 @@ public class TimerBarBehaviour : MonoBehaviour {
 		for (int i = 0; i < 5; i++) {
 			rocketDisplay[i].renderer.enabled = (i < rockets);
 		}
+	}
+	
+ 	public void setShakeTime(float time) {
+		shakeTime = time;
 	}
 }

@@ -462,6 +462,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destructionSound: {fileID: 8300000, guid: d52b7886c1cde9b4b82c4f8503e518c9, type: 3}
   explosionPrefab: {fileID: 11400000, guid: 65d5a2ad39ae2364d8851499d7eadbe6, type: 2}
+  gibPrefab: {fileID: 11400000, guid: db89a7e8bbb88cc4ba413abb8d67b414, type: 2}
+  gibCount: 3
+  gibSpeed: 10
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1
