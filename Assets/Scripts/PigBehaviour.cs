@@ -51,6 +51,8 @@ public class PigBehaviour : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
+		Screen.showCursor = false;
+		
 		screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0f);
 		ridingRocket = false;
 		isDead = false;
@@ -67,9 +69,6 @@ public class PigBehaviour : MonoBehaviour {
 		timerBar = (TimerBarBehaviour) FindObjectOfType(typeof(TimerBarBehaviour));
 		
 		facingRight = true;
-		
-		// XXX: set center of mass
-		rigidbody.centerOfMass = shoulderPos;
 	}
 	
 	void LateUpdate() {

@@ -4,12 +4,17 @@ ModelImporter:
   serializedVersion: 15
   fileIDToRecycleName:
     100000: cylinder1_default
-    100002: //RootNode
+    100002: cylinder2_default
+    100004: //RootNode
     400000: cylinder1_default
-    400002: //RootNode
+    400002: cylinder2_default
+    400004: //RootNode
     2300000: cylinder1_default
+    2300002: cylinder2_default
     3300000: cylinder1_default
+    3300002: cylinder2_default
     4300000: cylinder1_default
+    4300002: cylinder2_default
     9500000: //RootNode
   materials:
     importMaterials: 0
@@ -45,7 +50,7 @@ ModelImporter:
     splitTangentsAcrossUV: 1
     normalImportMode: 0
     tangentImportMode: 1
-  importAnimation: 0
+  importAnimation: 1
   copyAvatar: 0
   humanDescription:
     human: []
