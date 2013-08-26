@@ -26267,6 +26267,7 @@ GameObject:
   - 114: {fileID: 1561564796}
   - 82: {fileID: 1561564798}
   - 114: {fileID: 1561564797}
+  - 114: {fileID: 1561564799}
   m_Layer: 0
   m_Name: Timer
   m_TagString: Untagged
@@ -26331,10 +26332,10 @@ MonoBehaviour:
   boredomMax: 10
   display: {fileID: 1561564795}
   levelList:
-  - TutorialScene
   - Level4
   - Level5
   - SewerLevel
+  - Ending
   moreTime: {fileID: 8300000, guid: 5eb4281a1f153724e9e21a2974646ea4, type: 3}
   tickSound: {fileID: 8300000, guid: 52659c79baf18024f94f6c1abb47266d, type: 3}
 --- !u!114 &1561564797
@@ -26413,6 +26414,22 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+--- !u!114 &1561564799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400006, guid: 069c2a138b0d3024a93f41a3f9d2c9df,
+    type: 2}
+  m_PrefabInternal: {fileID: 1739027389}
+  m_GameObject: {fileID: 1561564793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb5d11f9ebf2749458c9053d8cc5340d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeColor: {r: 0, g: 0, b: 0, a: 0}
+  blank: {fileID: 2800000, guid: 9f210f212954f6d48935bbd812832e22, type: 3}
+  fadeTime: 2
+  fadeOnAwake: 0
 --- !u!1 &1568559671
 GameObject:
   m_ObjectHideFlags: 0

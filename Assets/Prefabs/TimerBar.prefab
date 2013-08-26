@@ -601,6 +601,7 @@ MonoBehaviour:
   - Level4
   - Level5
   - SewerLevel
+  - Ending
   moreTime: {fileID: 8300000, guid: 5eb4281a1f153724e9e21a2974646ea4, type: 3}
   tickSound: {fileID: 8300000, guid: 52659c79baf18024f94f6c1abb47266d, type: 3}
 --- !u!114 &11400004
@@ -632,7 +633,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeColor: {r: 0, g: 0, b: 0, a: 0}
   blank: {fileID: 2800000, guid: 9f210f212954f6d48935bbd812832e22, type: 3}
-  fadeTime: 2
+  fadeTime: 1
   fadeOnAwake: 0
 --- !u!1001 &100100000
 Prefab:

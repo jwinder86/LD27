@@ -103,7 +103,9 @@ public class TitleBehaviour : MonoBehaviour {
 	}
 	
 	private IEnumerator LoadLevelSoon(string levelName) {
-		yield return new WaitForSeconds(0.3f);
+		GetComponent<FadeBehaviour>().FadeOut();
+		
+		yield return new WaitForSeconds(2f);
 		
 		Application.LoadLevel(levelName);
 	}
