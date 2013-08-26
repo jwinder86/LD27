@@ -61,6 +61,11 @@ public class BoredomClock : MonoBehaviour {
 		}
 	}
 	
+	public bool isGameRunning(){
+		return gameRunning;
+	}
+		
+	
 	public void WinGame() {
 			gameRunning = false;		
 			StartCoroutine(loadNextLevel());
