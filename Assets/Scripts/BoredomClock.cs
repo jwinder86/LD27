@@ -33,6 +33,12 @@ public class BoredomClock : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		
+		// return to title
+		if (Input.GetKeyDown(KeyCode.Escape)) {
+			Application.LoadLevel("Intro");
+		}
+		
 	 	if (gameRunning) {
 			if(boredom > 0f){
 				boredom = boredom - Time.deltaTime;
