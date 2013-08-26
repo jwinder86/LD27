@@ -597,7 +597,6 @@ MonoBehaviour:
   boredomMax: 10
   display: {fileID: 11400000}
   levelList:
-  - TutorialScene
   - Level4
   - Level5
   - SewerLevel
