@@ -53,11 +53,12 @@ public class BoredomClock : MonoBehaviour {
 	
 	public void GameOver() {
 		if (gameRunning) {
-			gameRunning = false;
 			boredom = 0f;
 			pig.Die();
 			
 			StartCoroutine(ReloadLevel());
+			
+			gameRunning = false;
 		}
 	}
 	
