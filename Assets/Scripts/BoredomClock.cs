@@ -21,6 +21,9 @@ public class BoredomClock : MonoBehaviour {
 	
 	private int tickIndex;
 	
+	FadeBehaviour fade;
+	
+	
 	// Use this for initialization
 	void Start () {
 		boredom = boredomMax;
@@ -29,6 +32,8 @@ public class BoredomClock : MonoBehaviour {
 		pig = (PigBehaviour) FindObjectOfType(typeof(PigBehaviour));
 		
 		tickIndex = 0;
+		fade = this.GetComponent<FadeBehaviour>();
+		fade.FadeIn();
 	}
 	
 	// Update is called once per frame
@@ -103,14 +108,19 @@ public class BoredomClock : MonoBehaviour {
 	
 	public void WinGame() {
 		if (gameRunning) {
-			gameRunning = false;		
+			gameRunning = false;
+			
 			StartCoroutine(loadNextLevel());
 		}		
 	}
 	
 	
 	private IEnumerator loadNextLevel() {
-		yield return new WaitForSeconds(5f);
+		
+		yield return new WaitForSeconds(3f);
+		fade = this.GetComponent<FadeBehaviour>();
+		fade.FadeOut();
+		yield return new WaitForSeconds(2f);
 		
 		string nextLevel = levelList[0];
 		for (int i = 0; i < levelList.Length - 1; i++) {
