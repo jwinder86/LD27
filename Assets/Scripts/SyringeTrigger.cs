@@ -19,7 +19,7 @@ public class SyringeTrigger : MonoBehaviour {
 	}
 	
 	 void OnTriggerEnter(Collider other) {
-		if(null != other.GetComponent("PigBehaviour")){
+		if(null != other.GetComponent("PigBehaviour") && boredomClock.isGameRunning()){
 			collider.enabled = false;
 			effect.RunEffect();
 			audio.PlayOneShot(powerupSound);

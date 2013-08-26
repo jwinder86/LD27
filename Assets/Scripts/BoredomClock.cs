@@ -68,10 +68,10 @@ public class BoredomClock : MonoBehaviour {
 		
 	
 	public void WinGame() {
+		if (gameRunning) {
 			gameRunning = false;		
 			StartCoroutine(loadNextLevel());
-		
-		
+		}		
 	}
 	
 	
