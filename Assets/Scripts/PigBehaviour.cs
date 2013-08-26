@@ -170,6 +170,19 @@ public class PigBehaviour : MonoBehaviour {
 					AbandonRocket();
 					rigidbody.velocity = new Vector3(rigidbody.velocity.x, rigidbody.velocity.y, 0f);
 				}
+				
+				if (rocket != null) {
+					//Debug.Log(rocket.transform.forward);
+					if (rocket.transform.forward.x > 0f && !facingRight) {
+						Debug.Log("Rotating!");
+						MountRocket(transform.localPosition, transform.localRotation, true);
+					} else if (rocket.transform.forward.x < 0f && facingRight) {
+						Debug.Log("Rotating!");
+						MountRocket(transform.localPosition, transform.localRotation, false);
+					}
+				} else {
+					AbandonRocket();
+				}
 			}
 		} else if (stunTimer > 0f) {
 			stunTimer -= Time.deltaTime;
@@ -199,23 +212,26 @@ public class PigBehaviour : MonoBehaviour {
 			
 			animation.Play("StandAnimation", PlayMode.StopAll);
 			
-			MountRocket(transform.localPosition, transform.localRotation);
+			MountRocket(transform.localPosition, transform.localRotation, facingRight);
 		}
 	}
 	
 	public void AbandonRocket() {
-		StopAllCoroutines();
-		
-		ridingRocket = false;
-		transform.parent = null;
-		rigidbody.isKinematic = false;
-		rigidbody.velocity = rocket.rigidbody.velocity;
-		
-		if (!isDead && stunTimer <= 0f) {
-			transform.localRotation = Quaternion.Euler(new Vector3(0f, 90f, 0f));
+		if (ridingRocket) {
+			StopAllCoroutines();
+			
+			ridingRocket = false;
+			transform.parent = null;
+			rigidbody.isKinematic = false;
+			rigidbody.velocity = rocket.rigidbody.velocity;
+			
+			if (!isDead && stunTimer <= 0f) {
+				StartCoroutine(RecoverCoroutine(transform.localRotation));
+			}
+			
+			rocket.SetControlRocket(false);
+			rocket = null;
 		}
-		
-		rocket.SetControlRocket(false);
 	}
 	
 	public void Stun() {
@@ -238,8 +254,10 @@ public class PigBehaviour : MonoBehaviour {
 		
 		if (!isDead) {
 			rigidbody.constraints = initialConstraints;
-			transform.localRotation = Quaternion.Euler(new Vector3(0f, 90f, 0f));
 			transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
+			
+			StopAllCoroutines();
+			StartCoroutine(RecoverCoroutine(transform.localRotation));
 		}
 	}
 	
@@ -298,21 +316,44 @@ public class PigBehaviour : MonoBehaviour {
 		}
 	}
 	
-	private void MountRocket(Vector3 originalPosition, Quaternion originalRotation) {
+	private void MountRocket(Vector3 originalPosition, Quaternion originalRotation, bool faceRight) {
 		StopAllCoroutines();
-		StartCoroutine(MountRocketCoroutine(originalPosition, originalRotation));
+		StartCoroutine(MountRocketCoroutine(originalPosition, originalRotation, faceRight));
 	}
 	
-	private IEnumerator MountRocketCoroutine(Vector3 originalPosition, Quaternion originalRotation) {
+	private IEnumerator MountRocketCoroutine(Vector3 originalPosition, Quaternion originalRotation, bool faceRight) {
+		facingRight = faceRight;
+		
 		for (float t = 0; t <= rotateTime; t += Time.deltaTime) {
 			
-			transform.localPosition = Vector3.Lerp(originalPosition, new Vector3(0f, 0.4f, -2f), t / rotateTime); 
-			transform.localRotation = Quaternion.Slerp(originalRotation, Quaternion.Euler(new Vector3(90f, 0f, 0f)), t / rotateTime);
+			if (faceRight) {
+				transform.localPosition = Vector3.Lerp(originalPosition, new Vector3(0f, 0.4f, -2f), t / rotateTime); 
+				transform.localRotation = Quaternion.Slerp(originalRotation, Quaternion.Euler(new Vector3(90f, 0f, 0f)), t / rotateTime);
+			} else {
+				transform.localPosition = Vector3.Lerp(originalPosition, new Vector3(0f, -0.4f, -2f), t / rotateTime); 
+				transform.localRotation = Quaternion.Slerp(originalRotation, Quaternion.Euler(new Vector3(270f, 0f, 180f)), t / rotateTime);
+			}
 			
 			yield return null;
 		}
 		
-		transform.localPosition = new Vector3(0f, 0.4f, -2f); 
-		transform.localRotation = Quaternion.Euler(new Vector3(90f, 0f, 0f));
+		if (faceRight) {
+				transform.localPosition = new Vector3(0f, 0.4f, -2f); 
+				transform.localRotation = Quaternion.Euler(new Vector3(90f, 0f, 0f));
+			} else {
+				transform.localPosition = new Vector3(0f, -0.4f, -2f); 
+				transform.localRotation = Quaternion.Euler(new Vector3(270f, 0f, 180f));
+			}
+	}
+	
+	private IEnumerator RecoverCoroutine(Quaternion originalRotation) {
+		for (float t = 0; t <= rotateTime; t += Time.deltaTime) {
+			
+			transform.localRotation = Quaternion.Slerp(originalRotation, Quaternion.Euler(new Vector3(0f, 90f, 0f)), t / rotateTime);
+			
+			yield return null;
+		}
+		
+		transform.localRotation = Quaternion.Euler(new Vector3(0f, 90f, 0f));
 	}
 }

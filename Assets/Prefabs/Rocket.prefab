@@ -237,10 +237,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72458f1d866ac1d4b94a684df42ebccd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rocketLifetime: 4
+  rocketLifetime: 8
   turnAngleThreshold: 30
   turnSpeedDegrees: 45
   acceleration: 50
+  maxSpeed: 50
   particleSystem: {fileID: 19800000}
   model: {fileID: 400004}
   explosionPrefab: {fileID: 11400000, guid: 65d5a2ad39ae2364d8851499d7eadbe6, type: 2}

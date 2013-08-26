@@ -6,6 +6,8 @@ using System.Collections;
 [RequireComponent (typeof(AudioSource))]
 public class RocketBehaviour : MonoBehaviour {
 	
+	private static float rotateTime = 0.3f;
+	
 	public float rocketLifetime;
 	public float turnAngleThreshold;
 	public float turnSpeedDegrees;
@@ -46,9 +48,6 @@ public class RocketBehaviour : MonoBehaviour {
 		if (speed > maxSpeed && !rigidbody.isKinematic){
 			rigidbody.velocity = rigidbody.velocity.normalized * maxSpeed;
 		}
-		
-		
-		
 		
 		// rotate
 		//Debug.Log(controlRocket);
