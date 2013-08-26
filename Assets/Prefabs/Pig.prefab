@@ -399,7 +399,7 @@ AudioSource:
   m_Pitch: 1
   Loop: 0
   Mute: 0
-  Priority: 128
+  Priority: 255
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -494,6 +494,7 @@ MonoBehaviour:
   launcher: {fileID: 400010}
   crosshair: {fileID: 0}
   deathSound: {fileID: 8300000, guid: ebc97fcc7a48ef54ba074fd057da7ecc, type: 3}
+  hitSound: {fileID: 8300000, guid: 5fe861212c7089c4f86ecfbe39010c54, type: 3}
   rocketMax: 5
   rocketRechargePerSecond: 1
 --- !u!114 &11400002

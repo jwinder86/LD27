@@ -523,7 +523,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf276c58d25f34e40a311c1ce2b8d36a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerupSound: {fileID: 8300000, guid: 5eb4281a1f153724e9e21a2974646ea4, type: 3}
+  powerupSound: {fileID: 8300000, guid: 5fcc8d7e70374c74d9171e9a8c84a8ee, type: 3}
   effect: {fileID: 11400002}
 --- !u!114 &11400002
 MonoBehaviour:

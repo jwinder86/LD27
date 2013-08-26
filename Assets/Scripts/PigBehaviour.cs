@@ -10,6 +10,8 @@ public class PigBehaviour : MonoBehaviour {
 	private static Vector3 shoulderPos = new Vector3(0f, 1.5f, 0f);
 	private static float rotateTime = 0.4f;
 	
+	private static FollowTransform screen;
+	
 	public float runSpeed;
 	public float airSpeed;
 	public float jumpSpeed;
@@ -24,6 +26,7 @@ public class PigBehaviour : MonoBehaviour {
 	public Transform crosshair;
 	
 	public AudioClip deathSound;
+	public AudioClip hitSound;
 	
 	public float rocketMax = 5;
 	public float rocketRechargePerSecond = 0.5f;
@@ -237,6 +240,9 @@ public class PigBehaviour : MonoBehaviour {
 	public void Stun() {
 		stunTimer = stunTime;
 		
+		Debug.Log("Hit Sound");
+		audio.PlayOneShot(hitSound);
+		
 		if (ridingRocket) {
 			transform.localRotation = Quaternion.Euler(new Vector3(0f, -180f, 0f));
 			AbandonRocket();
@@ -247,6 +253,8 @@ public class PigBehaviour : MonoBehaviour {
 		animation.Play("StandAnimation", PlayMode.StopAll);
 		rigidbody.constraints = RigidbodyConstraints.FreezePositionZ;
 		rigidbody.AddTorque(Random.rotation.eulerAngles, ForceMode.VelocityChange);
+		
+		getScreen().HeavyShakeTime(stunTime);
 	}
 	
 	private void Recover() {
@@ -277,6 +285,8 @@ public class PigBehaviour : MonoBehaviour {
 			rigidbody.AddTorque(Random.rotation.eulerAngles, ForceMode.VelocityChange);
 			
 			boredomClock.GameOver();
+			
+			getScreen().HeavyShakeTime(0.3f);
 		}
 	}
 	
@@ -355,5 +365,13 @@ public class PigBehaviour : MonoBehaviour {
 		}
 		
 		transform.localRotation = Quaternion.Euler(new Vector3(0f, 90f, 0f));
+	}
+	
+	private FollowTransform getScreen() {
+		if (screen == null) {
+			screen = (FollowTransform) FindObjectOfType(typeof(FollowTransform));
+		}
+		
+		return screen;
 	}
 }

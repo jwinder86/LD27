@@ -700,6 +700,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toFollow: {fileID: 279310223}
+  shakeMagnitude: 2
+  shakeSpeed: 5
+  heavyShakeMagnitude: 10
+  heavyShakeSpeed: 10
+  offset: {x: 0, y: 5, z: -80}
 --- !u!1 &43639733
 GameObject:
   m_ObjectHideFlags: 0
@@ -5318,7 +5323,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1c3390f2ed176e746838d6e0ca462021, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 300
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1c3390f2ed176e746838d6e0ca462021, type: 2}
       propertyPath: m_LocalPosition.z
@@ -16857,6 +16862,8 @@ GameObject:
   - 4: {fileID: 1561564794}
   - 114: {fileID: 1561564795}
   - 114: {fileID: 1561564796}
+  - 82: {fileID: 1561564798}
+  - 114: {fileID: 1561564797}
   m_Layer: 0
   m_Name: Timer
   m_TagString: Untagged
@@ -16921,6 +16928,82 @@ MonoBehaviour:
   boredomMax: 10
   display: {fileID: 1561564795}
   nextLevel: Level5
+--- !u!114 &1561564797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400004, guid: 069c2a138b0d3024a93f41a3f9d2c9df,
+    type: 2}
+  m_PrefabInternal: {fileID: 1353882219}
+  m_GameObject: {fileID: 1561564793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 845a0016856f6b54da7bbb1825f7a1af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  songs:
+  - {fileID: 8300000, guid: e1b655dd3d31c5c48bbfb2dbd6774d56, type: 3}
+  - {fileID: 8300000, guid: 65f78dfe6e163714d86a511f1cd40352, type: 3}
+  - {fileID: 8300000, guid: e440f3c93d66486458da184753e3f773, type: 3}
+  - {fileID: 8300000, guid: ff7e12fe2c0354d4487ec21215277665, type: 3}
+--- !u!82 &1561564798
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 8200000, guid: 069c2a138b0d3024a93f41a3f9d2c9df,
+    type: 2}
+  m_PrefabInternal: {fileID: 1353882219}
+  m_GameObject: {fileID: 1561564793}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: .600000024
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 255
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 1
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!1 &1563429765
 GameObject:
   m_ObjectHideFlags: 0
@@ -18006,7 +18089,7 @@ Transform:
   m_PrefabInternal: {fileID: 647546203}
   m_GameObject: {fileID: 1563429765}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 110, y: 300, z: 0}
+  m_LocalPosition: {x: 110, y: 250, z: 0}
   m_LocalScale: {x: 800, y: 100, z: 10}
   m_Children: []
   m_Father: {fileID: 1974005937}
@@ -23916,10 +23999,10 @@ Transform:
   - {fileID: 453611318}
   - {fileID: 1270112003}
   - {fileID: 830772794}
-  - {fileID: 43639741}
-  - {fileID: 304247625}
-  - {fileID: 1780864227}
   - {fileID: 1310553149}
+  - {fileID: 1780864227}
+  - {fileID: 304247625}
+  - {fileID: 43639741}
   - {fileID: 2130938154}
   - {fileID: 1758169232}
   - {fileID: 1563429770}
@@ -23948,12 +24031,12 @@ Transform:
   - {fileID: 1708735719}
   - {fileID: 1069694256}
   - {fileID: 626082668}
+  - {fileID: 1884993758}
   - {fileID: 15754135}
+  - {fileID: 1157194706}
+  - {fileID: 1328300445}
   - {fileID: 592901565}
   - {fileID: 1592070983}
-  - {fileID: 1884993758}
-  - {fileID: 1328300445}
-  - {fileID: 1157194706}
   - {fileID: 1247339216}
   - {fileID: 1707196245}
   - {fileID: 573354470}

@@ -2,10 +2,7 @@
 using System.Collections;
 
 [RequireComponent (typeof(Collider))]
-[RequireComponent (typeof(AudioSource))]
 public class TargetTrigger : MonoBehaviour {
-	
-	public AudioClip destructionSound;
 	
 	public ExplosionBehaviour explosionPrefab;
 	
@@ -31,7 +28,6 @@ public class TargetTrigger : MonoBehaviour {
 		if (!exploded) {
 			exploded = true;
 			
-			audio.PlayOneShot(destructionSound);
 			boredomClock.increaseClock(10);
 			
 			// activate physics
@@ -44,7 +40,7 @@ public class TargetTrigger : MonoBehaviour {
 	}
 	
 	protected virtual IEnumerator ExplodeLater() {
-		yield return new WaitForSeconds(2f);
+		yield return new WaitForSeconds((Random.value / 2f + 0.5f) * 2f);
 		
 		ExplosionBehaviour explosion = (ExplosionBehaviour) Instantiate(explosionPrefab, transform.position, Quaternion.identity);
 		explosion.transform.localScale = transform.localScale;

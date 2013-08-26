@@ -409,7 +409,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b98c1b7f16b74aa42b9c18516e6b2b9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destructionSound: {fileID: 8300000, guid: d52b7886c1cde9b4b82c4f8503e518c9, type: 3}
+  destructionSound: {fileID: 8300000, guid: 5eb4281a1f153724e9e21a2974646ea4, type: 3}
   explosionPrefab: {fileID: 11400000, guid: 65d5a2ad39ae2364d8851499d7eadbe6, type: 2}
   gibPrefab: {fileID: 11400000, guid: 9c54493dcf0a83c498367e7a531391f7, type: 2}
   gibCount: 5
@@ -427,7 +427,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   personSpeed: 2
-  walkRight: 1
   rotateTime: .400000006
   walkTime: 3
 --- !u!114 &11400004

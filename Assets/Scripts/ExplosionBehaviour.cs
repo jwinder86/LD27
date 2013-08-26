@@ -6,6 +6,8 @@ using System.Collections;
 [RequireComponent (typeof(Collider))]
 public class ExplosionBehaviour : MonoBehaviour {
 	
+	private static FollowTransform screen = null;
+	
 	public AudioClip explosionSound;
 	
 	public float explosionForce;
@@ -22,6 +24,12 @@ public class ExplosionBehaviour : MonoBehaviour {
 	
 	public void Explode() {
 		StartCoroutine(ExplodeAction());
+		
+		if (screen == null) {
+			screen = (FollowTransform) FindObjectOfType(typeof(FollowTransform));
+		}
+		
+		screen.ShakeTime(0.5f);
 	}
 	
 	private IEnumerator ExplodeAction() {

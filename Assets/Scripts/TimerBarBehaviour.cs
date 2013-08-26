@@ -32,8 +32,6 @@ public class TimerBarBehaviour : MonoBehaviour {
 			
 			float scaleMult = Mathf.Sin(Time.timeSinceLevelLoad * Mathf.PI * shakeSpeed) * shakeMagnitude + 1f;
 			transform.localScale = parentInitialScale * scaleMult;
-		
-			Debug.Log(scaleMult);
 		}
 	}
 	

@@ -1,7 +1,10 @@
 using UnityEngine;
 using System.Collections;
 
+[RequireComponent (typeof(AudioSource))]
 public class BoredomClock : MonoBehaviour {
+	
+	private static float[] tickTimes = {5f, 4f, 3f, 2.5f, 2f, 1.5f, 1f, 0.75f, 0.5f, 0.25f, -100f};
 	
 	public float boredomMax = 10f;
 	public TimerBarBehaviour display;
@@ -11,7 +14,12 @@ public class BoredomClock : MonoBehaviour {
 	private PigBehaviour pig;
 	private bool gameRunning;
 	
-	public string nextLevel;
+	public string[] levelList;
+	
+	public AudioClip moreTime;
+	public AudioClip tickSound;
+	
+	private int tickIndex;
 	
 	// Use this for initialization
 	void Start () {
@@ -19,6 +27,8 @@ public class BoredomClock : MonoBehaviour {
 		gameRunning = true;
 		
 		pig = (PigBehaviour) FindObjectOfType(typeof(PigBehaviour));
+		
+		tickIndex = 0;
 	}
 	
 	// Update is called once per frame
@@ -46,6 +56,8 @@ public class BoredomClock : MonoBehaviour {
 			}
 		}
 		
+		playTick();
+		
 		if(Input.GetKeyDown ("r")){
 			Application.LoadLevel(Application.loadedLevel);
 		}
@@ -57,6 +69,11 @@ public class BoredomClock : MonoBehaviour {
 		if (gameRunning) {
 			boredom += amount;
 			display.setShakeTime(0.5f);
+			
+			resetTick();
+			
+			audio.PlayOneShot(moreTime);
+			
 			Debug.Log ("increasing time: " + amount + " = " + boredom);
 		}
 	}
@@ -88,11 +105,37 @@ public class BoredomClock : MonoBehaviour {
 	
 	private IEnumerator loadNextLevel() {
 		yield return new WaitForSeconds(5f);
+		
+		string nextLevel = levelList[0];
+		for (int i = 0; i < levelList.Length - 1; i++) {
+			if (levelList[i].Equals(Application.loadedLevelName)) {
+				nextLevel = levelList[i+1];
+			}
+		}
+		
 		Application.LoadLevel(nextLevel);
 	}
 	
 	private IEnumerator ReloadLevel() {
 		yield return new WaitForSeconds(5f);
 		Application.LoadLevel(Application.loadedLevel);
+	}
+	
+	private void playTick() {
+		if (boredom < tickTimes[tickIndex]) {
+			audio.PlayOneShot(tickSound);
+			tickIndex++;
+		}
+	}
+	
+	private void resetTick() {
+		for (int i = 0; i < tickTimes.Length; i++) {
+			if (tickTimes[i] < boredom) {
+				tickIndex = i;
+				break;
+			}
+		}
+		
+		Debug.Log("New Tick Time" + tickIndex);
 	}
 }
