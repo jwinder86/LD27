@@ -1,25 +1,20 @@
 fileFormatVersion: 2
-guid: 075b7ae18bc955c42b8048c9fc5b1503
+guid: f2de98d31a4072c479abc261c73a73c1
 ModelImporter:
   serializedVersion: 15
   fileIDToRecycleName:
-    100000: cube4_default
-    100002: cube6_default
-    100004: cube7_default
-    100006: //RootNode
-    400000: cube4_default
-    400002: cube6_default
-    400004: cube7_default
-    400006: //RootNode
-    2300000: cube4_default
-    2300002: cube6_default
-    2300004: cube7_default
-    3300000: cube4_default
-    3300002: cube6_default
-    3300004: cube7_default
-    4300000: cube4_default
-    4300002: cube6_default
-    4300004: cube7_default
+    100000: cylinder8_default
+    100002: cylinder9_default
+    100004: //RootNode
+    400000: cylinder8_default
+    400002: cylinder9_default
+    400004: //RootNode
+    2300000: cylinder8_default
+    2300002: cylinder9_default
+    3300000: cylinder8_default
+    3300002: cylinder9_default
+    4300000: cylinder8_default
+    4300002: cylinder9_default
     9500000: //RootNode
   materials:
     importMaterials: 0
