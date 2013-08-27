@@ -36,8 +36,8 @@ public class TitleBehaviour : MonoBehaviour {
 		moved = false;
 		
 		buttons = new TextMesh[3];
-		buttons[0] = playButton;
-		buttons[1] = tutorialButton;
+		buttons[0] = tutorialButton;
+		buttons[1] = playButton;
 		buttons[2] = storyButton;
 		
 		Camera.main.transform.position = markerList[0].position;
