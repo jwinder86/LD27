@@ -1,4 +1,3 @@
-LD27
-====
+Bored to Death
 
-Ludum Dare 27
+entry for Ludum Dare #27: http://www.ludumdare.com/compo/ludum-dare-27/?action=preview&uid=14991
